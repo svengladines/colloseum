@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html">
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="javascript/jQueryWithoutDollar-1.6.4.min.js"></script>
+
+	<title>Colloseum</title>
+
+</head>
+
+  <body>
+  
+	  <script>
+	  	$jq = jQuery.noConflict();
+	  </script>
+  
+		<div class="navbar navbar-fixed-top">
+		    <div class="navbar-inner">
+		        <div class="container-fluid">
+		        	<span class="brand">Colloseum</span>
+		            <div class="nav-collapse">
+		                <ul class="nav">
+		                    <li class="active"><a href=".">Home</a></li>
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+		<div class="container-fluid">
+	
+		    <div class="row-fluid">
+		        <div class="page-header">
+		            <ul class="breadcrumb">
+		                <li class="active">
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
+		    
+		    <div class="row-fluid">
+		
+				<div class="span2">
+				
+				</div>
+				
+				<div class="span4">
+				
+					<form
+						id="publit"
+						class="well">
+						
+						<div class="control-group">
+            				<label class="control-label" for="textarea">Textarea</label>
+           						<div class="controls">
+              						<textarea name="data" class="input-xxlarge" id="textarea" rows="3" >http://www.youtube.com/watch?v=1H5loYi6wVc</textarea>
+            					</div>
+          				</div>
+						<input id="post" type="button" class="btn" value="submit"/>
+					</form>
+					
+					<span id="title"></span>
+				
+				</div>
+				
+				<div class="span2">
+				
+				</div>
+				
+			</div>
+			
+			<div id="data">
+			
+			</div>
+			
+		</div>
+		
+		<script>
+		
+			$jq("#post").click( function( ) {
+				
+				var fdata
+					= new FormData();
+				
+				var fields
+					= $jq("#publit").serializeArray();
+				
+				$jq.each(fields, function(i, field) {
+					
+					fdata.append( field.name, field.value );
+			        
+			      });
+
+				
+				$jq.ajax( {
+						type: "post",
+						url:"http://localhost:8090/colloseum-publisher-rs/rs/publits",
+						dataType: "json",
+						contentType: false,
+					    processData: false,
+						data: fdata,
+						success: function( publit ) {
+							 
+							$jq("#data").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
+							$jq("#data").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
+						    
+						  }
+						}
+					);
+			});
+		
+		</script>
+</body>
+
+</html>
