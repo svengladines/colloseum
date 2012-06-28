@@ -1,8 +1,0 @@
-#Tue May 22 22:15:37 CEST 2012
-activeProfiles=bb91
-eclipse.preferences.version=1
-fullBuildGoals=process-test-resources
-resolveWorkspaceProjects=true
-resourceFilterGoals=process-resources resources\:testResources
-skipCompilerPlugin=true
-version=1

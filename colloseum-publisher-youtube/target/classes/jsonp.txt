@@ -1,1 +1,0 @@
-<script src= "http://gdata.youtube.com/feeds/api/videos/@@id@@?v=2&alt=json-in-script&format=5&callback=assemble></script>
