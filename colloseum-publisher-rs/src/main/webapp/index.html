@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html">
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,13 +8,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
     
     <script type="text/javascript" src="javascript/jQueryWithoutDollar-1.6.4.min.js"></script>
 
 	<title>Colloseum</title>
+	
+	<style type="text/css">
+   		body {
+     		padding-top: 60px;
+     		padding-bottom: 40px;
+   		}
+    </style>
 
 </head>
 
@@ -60,10 +60,10 @@
 				
 				</div>
 				
-				<div class="span4">
+				<div class="span8">
 				
 					<form
-						id="publit"
+						id="hole"
 						class="well">
 						
 						<div class="control-group">
@@ -72,10 +72,42 @@
               						<textarea name="data" class="input-xxlarge" id="textarea" rows="3" >http://www.youtube.com/watch?v=1H5loYi6wVc</textarea>
             					</div>
           				</div>
+          				<input name="create" type="hidden" value="false"/>
 						<input id="post" type="button" class="btn" value="submit"/>
 					</form>
 					
-					<span id="title"></span>
+					<div id="data">
+					
+						<div>
+						
+							<form
+								id="publit"
+								class="form-horizontal">
+								
+								<fieldset>
+								
+									<label for="title">Titel</label>
+									<input type="text" id="title" contenteditable="true" class="input-xxlarge"></input>
+									<label for="description">Commentaar</label>
+              						<textarea name="description" class="input-xxlarge" id="textarea" rows="3" ></textarea>
+              						
+              						<input id="preview" name="preview" type="hidden"/>
+              						<input name="create" type="hidden" value="true"/>
+              						
+              						<div class="form-actions">
+	            						<button id="publish" type="submit" class="btn btn-primary" data-loading-text="${busy}">publiceer</button>
+	          						</div>
+									
+								</fieldset>
+							</form>
+							
+						</div>
+						
+						<img id="previewimg"></img>
+				
+					</div>
+					
+				
 				
 				</div>
 				
@@ -85,21 +117,24 @@
 				
 			</div>
 			
-			<div id="data">
+				
 			
-			</div>
+			 <div class="row-fluid">
+			
+			 
+			 </div>
 			
 		</div>
 		
 		<script>
 		
-			$jq("#post").click( function( ) {
+			$jq("#hole").bind('paste', function( ) {
 				
 				var fdata
 					= new FormData();
 				
 				var fields
-					= $jq("#publit").serializeArray();
+					= $jq("#hole").serializeArray();
 				
 				$jq.each(fields, function(i, field) {
 					
@@ -119,7 +154,50 @@
 							 
 							$jq("#data").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
 							$jq("#data").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
-						    
+							
+							$jq("#previewimg").attr( "src", publit.preview );
+							$jq("#preview").attr( "value", publit.preview );
+							$jq("#id").attr( "value", publit.id );
+							
+						  }
+						}
+					);
+			});
+			
+			$jq("#publish").click( function( ) {
+				
+				var fdata
+					= new FormData();
+				
+				var fields
+					= $jq("#publit").serializeArray();
+				
+				$jq.each(fields, function(i, field) {
+					
+					fdata.append( field.name, field.value );
+			        
+			      });
+				
+				
+				var id
+					= $jq("#id").val();
+
+				
+				$jq.ajax( {
+						type: "post",
+						url:"http://localhost:8090/colloseum-publisher-rs/rs/publits/" + id,
+						dataType: "json",
+						contentType: false,
+					    processData: false,
+						data: fdata,
+						success: function( publit ) {
+							 
+							$jq("#data").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
+							$jq("#data").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
+							
+							$jq("#previewimg").attr( "src", publit.preview );
+							$jq("#preview").attr( "value", publit.preview );
+							
 						  }
 						}
 					);
