@@ -1,18 +1,15 @@
 package be.occam.colloseum.model;
 
-import java.util.List;
 
-public class Object {
+public class LivingBeing extends Thing {
 
-	protected List<Event<?>> autoSpawnEvents;
-	
-	protected Object wakeUp() {
+	protected LivingBeing wakeUp() {
 		
 		return this;
 		
 	}
 	
-	protected Object sleep() {
+	protected LivingBeing sleep() {
 		
 		return this;
 		

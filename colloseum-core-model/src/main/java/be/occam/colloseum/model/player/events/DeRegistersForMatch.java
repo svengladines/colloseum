@@ -4,6 +4,6 @@ import be.occam.colloseum.model.Event;
 import be.occam.colloseum.model.Match;
 import be.occam.colloseum.model.Player;
 
-public class ReceivesRedCardEvent extends Event<Player,Match> {
+public class DeRegistersForMatch extends Event<Player,Match> {
 
 }
