@@ -3,15 +3,15 @@
 	<parent>
 		<artifactId>parent-pom</artifactId>
 		<groupId>be.occam</groupId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0-LATEST-SNAPSHOT</version>
 	</parent>
 	
  	<groupId>be.occam.colloseum</groupId>
- 	<artifactId>colloseum-youtube</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>colloseum-publisher-core</name>
-  <description>colloseum-publisher-core</description>
+ 	<artifactId>colloseum-publisher-rs</artifactId>
+  	<version>1.0-LATEST-SNAPSHOT</version>
+  	<packaging>war</packaging>
+  	<name>colloseum-publisher-rs</name>
+  	<description>colloseum-publisher-rs</description>
 
 	<dependencies>
 	
@@ -60,11 +60,9 @@
 		</dependency>
 		
 		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publisher-youtube</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>test</scope>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${com.sun.jersey.version}</version>
 		</dependency>
 
 	</dependencies>

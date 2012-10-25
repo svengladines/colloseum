@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html">
+<!DOCTYPE html>
+
+<html>
 
 <head>
 	
@@ -12,6 +14,8 @@
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
     
     <script type="text/javascript" src="javascript/jQueryWithoutDollar-1.6.4.min.js"></script>
+    <script type="text/javascript" src="http://jdewit.github.com/bootstrap-timepicker/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+	<script type="text/javascript" src="http://www.eyecon.ro/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 	<title>Colloseum</title>
 	
@@ -63,50 +67,36 @@
 				<div class="span8">
 				
 					<form
-						id="hole"
+						id="publit"
 						class="well">
 						
 						<div class="control-group">
             				<label class="control-label" for="textarea">Textarea</label>
            						<div class="controls">
-              						<textarea name="data" class="input-xxlarge" id="textarea" rows="3" >http://www.youtube.com/watch?v=1H5loYi6wVc</textarea>
+              						<textarea id="data" name="data" class="input-xxlarge" rows="3" >http://www.youtube.com/watch?v=1H5loYi6wVc</textarea>
             					</div>
           				</div>
-          				<input name="create" type="hidden" value="false"/>
-						<input id="post" type="button" class="btn" value="submit"/>
-					</form>
-					
-					<div id="data">
-					
-						<div>
+          				
+          				<div class="control-group">
+          				
+          					<fieldset>
+	          				
+		          				<label for="title">Titel</label>
+								<input type="text" id="title" contenteditable="true" class="input-xxlarge"></input>
+											
+								<label for="description">Commentaar</label>
+	              				<textarea id="description" name="description" class="input-xxlarge" rows="3" ></textarea>
+		          				
+		          				<input id="create" name="create" type="hidden" value="false"/>
+		          				<input id="preview" name="preview" type="hidden"/>
+	          				
+	          				</fieldset>
+	          				
+							<button id="publish" type="submit" class="btn btn-primary" data-loading-text="${busy}">publiceer</button>
 						
-							<form
-								id="publit"
-								class="form-horizontal">
-								
-								<fieldset>
-								
-									<label for="title">Titel</label>
-									<input type="text" id="title" contenteditable="true" class="input-xxlarge"></input>
-									<label for="description">Commentaar</label>
-              						<textarea name="description" class="input-xxlarge" id="textarea" rows="3" ></textarea>
-              						
-              						<input id="preview" name="preview" type="hidden"/>
-              						<input name="create" type="hidden" value="true"/>
-              						
-              						<div class="form-actions">
-	            						<button id="publish" type="submit" class="btn btn-primary" data-loading-text="${busy}">publiceer</button>
-	          						</div>
-									
-								</fieldset>
-							</form>
-							
 						</div>
 						
-						<img id="previewimg"></img>
-				
-					</div>
-					
+					</form>
 				
 				
 				</div>
@@ -128,42 +118,6 @@
 		
 		<script>
 		
-			$jq("#hole").bind('paste', function( ) {
-				
-				var fdata
-					= new FormData();
-				
-				var fields
-					= $jq("#hole").serializeArray();
-				
-				$jq.each(fields, function(i, field) {
-					
-					fdata.append( field.name, field.value );
-			        
-			      });
-
-				
-				$jq.ajax( {
-						type: "post",
-						url:"http://localhost:8090/colloseum-publisher-rs/rs/publits",
-						dataType: "json",
-						contentType: false,
-					    processData: false,
-						data: fdata,
-						success: function( publit ) {
-							 
-							$jq("#data").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
-							$jq("#data").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
-							
-							$jq("#previewimg").attr( "src", publit.preview );
-							$jq("#preview").attr( "value", publit.preview );
-							$jq("#id").attr( "value", publit.id );
-							
-						  }
-						}
-					);
-			});
-			
 			$jq("#publish").click( function( ) {
 				
 				var fdata
@@ -177,32 +131,29 @@
 					fdata.append( field.name, field.value );
 			        
 			      });
-				
-				
-				var id
-					= $jq("#id").val();
 
 				
 				$jq.ajax( {
 						type: "post",
-						url:"http://localhost:8090/colloseum-publisher-rs/rs/publits/" + id,
+						url:"/colloseum-publisher-rs/rs/publits",
 						dataType: "json",
 						contentType: false,
 					    processData: false,
 						data: fdata,
 						success: function( publit ) {
 							 
-							$jq("#data").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
-							$jq("#data").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
+							$jq("#thedata").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
+							$jq("#thedata").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
 							
 							$jq("#previewimg").attr( "src", publit.preview );
 							$jq("#preview").attr( "value", publit.preview );
+							$jq("#data").attr( "value", publit.data );
 							
 						  }
 						}
 					);
 			});
-		
+			
 		</script>
 </body>
 

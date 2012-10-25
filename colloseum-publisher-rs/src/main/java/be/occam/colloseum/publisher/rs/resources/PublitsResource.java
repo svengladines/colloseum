@@ -93,12 +93,6 @@ public class PublitsResource {
 				
 			}
 			
-			FormDataBodyPart idPart
-				= form.getField( "id" );
-			
-			String id
-				= idPart != null ? idPart.getValue() : null;
-			
 			FormDataBodyPart titlePart
 				= form.getField( "title" );
 			
@@ -112,9 +106,23 @@ public class PublitsResource {
 				= descriptionPart != null ? descriptionPart.getValue() : null;
 			
 			publit
-					.setId( id )
 					.setTitle( title )
 					.setDescription( description );
+			
+			FormDataBodyPart createPart
+				= form.getField( "create" );
+		
+			boolean create
+				= createPart != null ? Boolean.valueOf( createPart.getValue() ) : false;
+				
+			if ( create ) {
+				
+				String id
+					= UUID.randomUUID().toString();
+				
+				publit.setId( id  ); 
+				
+			}
 			
 			Response response
 				= null;
@@ -126,15 +134,15 @@ public class PublitsResource {
 				
 				if ( publisher.accept( publit , httpContext) ) {
 					
-					publit.setId( UUID.randomUUID().toString() );
-					
-					StringBuilder b
-						= new StringBuilder( httpContext.getUriInfo().getRequestUri().toString() ).append( "/" ).append( publit.getId() );
-					
 					Publit published 
 						= publisher.publish( publit, httpContext );
 					
-					if ( published != null ) {
+					if ( create ) {
+						
+						StringBuilder b
+							= new StringBuilder( httpContext.getUriInfo().getRequestUri().toString() ).append( "/" ).append( publit.getId() );
+						
+						logger.info( "[{}]; create", published );
 					
 						this.publitStorage.persist( published );
 						
@@ -144,6 +152,13 @@ public class PublitsResource {
 								.entity( published )
 								.build();
 						
+					}
+					else {
+						response 
+							= Response
+							.ok( )
+							.entity( published )
+							.build();
 					}
 					
 					break;
