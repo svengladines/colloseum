@@ -2,14 +2,19 @@ package be.occam.colloseum.model;
 
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 public class Thing {
 	
 	protected String id;
+	
 	protected Set<String> tags;
 	
+	@XmlAttribute
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
