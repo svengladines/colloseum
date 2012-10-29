@@ -1,5 +1,6 @@
 package be.occam.colloseum.core.rs.jtests;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.core.MediaType;
@@ -8,19 +9,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import be.occam.colloseum.model.Person;
-import be.occam.colloseum.model.events.Events;
 import be.occam.test.jtest.JTest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataMultiPart;
 
 public class TestPersonsResource extends JTest {
 	
 	private final String path
 		= "persons";
-	
 	
 	public TestPersonsResource() {
 		
@@ -51,8 +48,11 @@ public class TestPersonsResource extends JTest {
 		String name
 			= "Simpson";
 		
+		String nick
+			= "Jay";
+		
 		Person person
-			= new Person().setFirstName( first ).setName( name );
+			= new Person().setFirstName( first ).setName( name ).setNickName( nick );
 		
 		ClientResponse response
 			= resource
@@ -62,11 +62,26 @@ public class TestPersonsResource extends JTest {
 	
 		assertEquals( 201, response.getStatus() );
 		
-		String publit
+		String created
 			= response.getEntity( String.class );
 		
-		logger.debug( "person: [{}]", publit );
+		logger.debug( "person: [{}]", created );
 		
+		ClientResponse getResponse
+			= resource
+			.accept( MediaType.APPLICATION_JSON_TYPE )
+			.get( ClientResponse.class );
+		
+		assertEquals( 200, getResponse.getStatus() );
+		
+		Person [] persons
+			= getResponse.getEntity( Person[].class );
+		
+		assertTrue( persons.length > 0 );
+		
+		for ( Person p : persons ) {
+			logger.debug( "id = [{}]", p.getId() );
+		}
 		
 	}
 	
