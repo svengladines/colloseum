@@ -54,6 +54,10 @@ public class PersonsResource {
 			Person p
 				= PersonUtil.load( this.directory, file, providers );
 			
+			if ( "template".equals( p.getId() ) ) {
+				continue;
+			}
+			
 			persons.add( p );
 			
 			logger.debug( "[{}]; in list ", p.getId() );
