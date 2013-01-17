@@ -33,7 +33,7 @@ public class DefaultMatchRepository implements IMatchRepository {
 	
 	protected MessageBodyReader<Match> messageBodyReader;
 	
-	@Value("${colloseum.soccer.teams.directory}")
+	@Value("${colloseum.soccer.matches.directory}")
 	protected String directory;
 	
 	@Override

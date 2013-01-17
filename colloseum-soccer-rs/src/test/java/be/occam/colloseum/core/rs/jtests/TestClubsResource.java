@@ -4,17 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.core.MediaType;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import be.occam.colloseum.model.events.Events;
 import be.occam.colloseum.soccer.club.Club;
 import be.occam.test.jtest.JTest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataMultiPart;
 
 public class TestClubsResource extends JTest {
 	

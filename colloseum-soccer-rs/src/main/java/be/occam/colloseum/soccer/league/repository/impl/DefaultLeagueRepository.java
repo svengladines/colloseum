@@ -33,7 +33,7 @@ public class DefaultLeagueRepository implements ILeagueRepository {
 	
 	protected MessageBodyReader<League> messageBodyReader;
 	
-	@Value("${colloseum.soccer.teams.directory}")
+	@Value("${colloseum.soccer.leagues.directory}")
 	protected String directory;
 	
 	@Override

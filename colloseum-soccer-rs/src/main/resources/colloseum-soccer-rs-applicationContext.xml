@@ -19,6 +19,6 @@
 		</property>
 	</bean>
     
-    <context:component-scan base-package="be.occam.colloseum.soccer"/>
+    <context:component-scan base-package="be.occam.colloseum.person,be.occam.colloseum.soccer"/>
 	
 </beans>
