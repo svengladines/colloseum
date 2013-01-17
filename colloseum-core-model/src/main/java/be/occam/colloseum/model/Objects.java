@@ -3,6 +3,8 @@ package be.occam.colloseum.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import be.occam.colloseum.person.Person;
+
 public class Objects {
 	
 	private final Map<String,String> objects

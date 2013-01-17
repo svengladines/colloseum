@@ -2,6 +2,8 @@ package be.occam.colloseum.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import be.occam.colloseum.person.Person;
+
 public class God extends Person {
 
 	@Override

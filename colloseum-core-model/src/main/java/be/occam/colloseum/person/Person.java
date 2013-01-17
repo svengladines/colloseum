@@ -1,7 +1,11 @@
-package be.occam.colloseum.model;
+package be.occam.colloseum.person;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import be.occam.colloseum.model.LivingBeing;
 
 @XmlRootElement
 public class Person extends LivingBeing {
@@ -13,6 +17,8 @@ public class Person extends LivingBeing {
 	protected String nickName;
 	
 	protected String url;
+	
+	protected String email;
 
 	@XmlAttribute
 	public String getName() {
@@ -53,5 +59,17 @@ public class Person extends LivingBeing {
 		this.url = url;
 		return this;
 	}
+
+	@XmlAttribute
+	public String getEmail() {
+		return email;
+	}
+
+	public Person setEmail(String email) {
+		this.email = email;
+		return this;
+	}
+	
+	
 	
 }

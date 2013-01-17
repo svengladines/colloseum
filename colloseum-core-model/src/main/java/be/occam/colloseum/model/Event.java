@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import be.occam.colloseum.person.Person;
+
 @XmlRootElement
 @XmlSeeAlso(Person.class)
 public class Event<S,O> {
