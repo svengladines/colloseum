@@ -14,4 +14,22 @@
   	<name>colloseum-core-model</name>
   	<description>colloseum-core-model</description>
   	
+  	<dependencies>
+  	
+  		<dependency>
+			<type>pom</type>
+			<groupId>be.kuleuven.toledo</groupId>
+			<artifactId>springframework-deps</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>pom</type>
+			<groupId>be.kuleuven.toledo</groupId>
+			<artifactId>jersey-deps</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+  	</dependencies>
+  	
 </project>
