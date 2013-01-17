@@ -1,6 +1,5 @@
 package be.occam.colloseum.core.rs.resources.person;
 
-import javax.annotation.Resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import be.occam.colloseum.core.person.IDorm;
 import be.occam.colloseum.core.rs.util.PersonUtil;
-import be.occam.colloseum.model.Person;
+import be.occam.colloseum.person.Person;
 
 import com.sun.jersey.api.core.HttpContext;
 
@@ -43,7 +42,7 @@ public class PersonResource {
 			= new StringBuilder( id ).append( ".xml" ).toString();
 		
 		Person p
-			= PersonUtil.load( this.directory, file, providers );
+			= null; // PersonUtil.load( this.directory, file, providers );
 		
 		return p;
 		

@@ -1,6 +1,6 @@
 package be.occam.colloseum.core.biosphere;
 
-import be.occam.colloseum.model.Person;
+import be.occam.colloseum.person.Person;
 
 public interface IPI {
 	

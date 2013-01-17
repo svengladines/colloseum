@@ -10,7 +10,7 @@ import javax.ws.rs.ext.Providers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import be.occam.colloseum.model.Person;
+import be.occam.colloseum.person.Person;
 
 public class PersonUtil {
 	

@@ -1,14 +1,14 @@
 package be.occam.colloseum.core.rs.jtests;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import javax.ws.rs.core.MediaType;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import be.occam.colloseum.model.Person;
+import be.occam.colloseum.person.Person;
 import be.occam.test.jtest.JTest;
 
 import com.sun.jersey.api.client.ClientResponse;
