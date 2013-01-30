@@ -15,12 +15,15 @@ public class Thing {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public Thing setId(String id) {
 		this.id = id;
+		return this;
 	}
+	
 	public Set<String> getTags() {
 		return tags;
 	}
+	
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
 	}

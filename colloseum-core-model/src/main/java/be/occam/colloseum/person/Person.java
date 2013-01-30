@@ -1,11 +1,17 @@
 package be.occam.colloseum.person;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import be.occam.colloseum.action.Action;
+import be.occam.colloseum.action.ActionDTO;
+import be.occam.colloseum.action.repository.IActionRepository;
 import be.occam.colloseum.model.LivingBeing;
+import be.occam.colloseum.person.repository.IPersonRepository;
 
 @XmlRootElement
 public class Person extends LivingBeing {
@@ -19,7 +25,16 @@ public class Person extends LivingBeing {
 	protected String url;
 	
 	protected String email;
-
+	
+	protected List<ActionDTO> todo
+		= new LinkedList<ActionDTO>();
+	
+	protected List<Action<?>> done
+		= new LinkedList<Action<?>>();
+	
+	@Resource
+	IPersonRepository personRepository;
+	
 	@XmlAttribute
 	public String getName() {
 		return name;
@@ -70,6 +85,24 @@ public class Person extends LivingBeing {
 		return this;
 	}
 	
+	public Person persist() {
+		
+		// this.personRepository.persist( this , null );
+		return this;
+		
+	}
+
+	@Override
+	public Person setId(String id) {
+		super.setId( id );
+		return this;
+	}
 	
+	public Person accept( ActionDTO action ) {
+		
+		this.todo.add( action );
+		return this;
+		
+	}
 	
 }

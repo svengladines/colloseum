@@ -13,6 +13,6 @@ public interface IPersonRepository {
 	
 	public Set<Person> findAll( Providers providers );
 	
-	public Person persist( Person id, Providers providers );
+	public Person persist( Person person );
 
 }

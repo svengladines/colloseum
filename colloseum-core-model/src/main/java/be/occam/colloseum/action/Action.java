@@ -3,15 +3,17 @@ package be.occam.colloseum.action;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import be.occam.colloseum.person.Person;
 
-@XmlRootElement
-public abstract class Action<T> {
+@XmlTransient
+public class Action<T> {
 	
 	protected String id;
 	
 	protected Person actor;
+	
 	protected T subject;
 	
 	protected Date date;
@@ -52,8 +54,4 @@ public abstract class Action<T> {
 		return this;
 	}
 	
-	public abstract Action<T> execute();
-	
-	
-
 }

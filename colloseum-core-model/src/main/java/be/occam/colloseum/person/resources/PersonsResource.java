@@ -56,7 +56,7 @@ public class PersonsResource {
 		person.setId( id );
 		
 		person 
-			= this.personRepository.persist( person , providers );
+			= this.personRepository.persist( person );
 		
 		return Response
 			.created( this.uri( person, httpContext) )

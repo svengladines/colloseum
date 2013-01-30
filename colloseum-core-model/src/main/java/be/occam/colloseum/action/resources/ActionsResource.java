@@ -1,6 +1,7 @@
 package be.occam.colloseum.action.resources;
 
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -16,7 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import be.occam.colloseum.action.Action;
-import be.occam.colloseum.action.repository.IActionRepository;
+import be.occam.colloseum.action.ActionDTO;
+import be.occam.colloseum.action.service.IActionService;
+import be.occam.colloseum.application.ProvidersRegistry;
 
 @Path( "actions" )
 public class ActionsResource {
@@ -24,41 +27,45 @@ public class ActionsResource {
 	protected Logger logger 
 		= LoggerFactory.getLogger( this.getClass() );
 	
-	protected Action<?>[] array = {};
-	
-	@Context
 	protected Providers providers;
-	
-	@Resource
-	protected IActionRepository actionRepository;
 	
 	protected MessageBodyWriter<Action<?>> writer;
 	
+	@Resource
+	protected IActionService actionService;
+	
 	@GET
-	public Action<?>[] get( ) {
+	public List<ActionDTO> get( ) {
+	
+		List<ActionDTO> actions 
+			= Arrays.asList( );
 		
-		Set<Action<?>> clubs 
-			= this.actionRepository.findAll( this.providers );
-		
-		return clubs.toArray( this.array );
+		return actions;
 		
 	}
 	
 	@POST
-	public Response post( Action<?> club ) {
+	public Response post( ActionDTO action ) {
 		
 		String id
-			= club.getId();
+			= action.getId();
 		
 		if ( id == null ) {
-			id
-				= UUID.randomUUID().toString();
-			club.setId( id );
+			id = UUID.randomUUID().toString();
+			action.setId( id );
 		}
 		
-		this.actionRepository.persist( club , providers );
+		ActionDTO created
+			= this.actionService.create( action );
 		
-		return Response.ok().entity( club ).build();
+		return Response.ok().entity( created ).build();
+		
+	}
+
+	@Context
+	public void setProviders(Providers providers) {
+		
+		ProvidersRegistry.register( providers );
 		
 	}
 	
