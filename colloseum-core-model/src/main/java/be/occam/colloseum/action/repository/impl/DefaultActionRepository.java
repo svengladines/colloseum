@@ -46,7 +46,7 @@ public class DefaultActionRepository implements IActionRepository {
 	}
 	
 	@Override
-	public List<ActionDTO> findAll( Providers providers ) {
+	public List<ActionDTO> findAll( ) {
 		
 		try {
 			
@@ -110,7 +110,7 @@ public class DefaultActionRepository implements IActionRepository {
 			FileOutputStream fos
 				= new FileOutputStream( b.toString() );
 			
-			this.messageBodyWriter.writeTo( action, Action.class, action.getClass(), new Annotation[] {}, MediaType.APPLICATION_JSON_TYPE, null, fos );
+			this.messageBodyWriter.writeTo( action, ActionDTO.class, action.getClass(), new Annotation[] {}, MediaType.APPLICATION_JSON_TYPE, null, fos );
 			
 			return action;
 			

@@ -11,7 +11,7 @@ public interface IActionRepository {
 
 	public ActionDTO findOne( String id );
 	
-	public List<ActionDTO> findAll( Providers providers );
+	public List<ActionDTO> findAll( );
 	
 	public ActionDTO persist( ActionDTO persist );
 
