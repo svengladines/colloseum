@@ -1,6 +1,6 @@
 package be.occam.colloseum.publisher.core.storage;
 
-import be.occam.colloseum.publisher.core.Publit;
+import be.occam.colloseum.publit.Publit;
 
 public interface IPublitStorage {
 	

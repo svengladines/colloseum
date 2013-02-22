@@ -1,15 +1,15 @@
 package be.occam.colloseum.publisher.core.util;
 
-import be.occam.colloseum.publisher.core.Publit;
+import be.occam.colloseum.publit.Publit;
 
 import com.sun.jersey.api.core.HttpContext;
 
 public class URIUtil {
 	
-	public static StringBuilder url( HttpContext context, Publit shareable ) {
+	public static StringBuilder url( HttpContext context, Publit publit ) {
 		
 		StringBuilder b
-			= new StringBuilder( context.getUriInfo().getBaseUri().toString() ).append( "shareables/" ).append( shareable.getId() );
+			= new StringBuilder( context.getUriInfo().getBaseUri().toString() ).append( "publits/" ).append( publit.getId() );
 		
 		return b;
 		

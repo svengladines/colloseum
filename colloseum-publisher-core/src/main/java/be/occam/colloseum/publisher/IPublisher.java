@@ -1,6 +1,6 @@
-package be.occam.colloseum.publisher.core;
+package be.occam.colloseum.publisher;
 
-import java.net.URL;
+import be.occam.colloseum.publit.Publit;
 
 import com.sun.jersey.api.core.HttpContext;
 

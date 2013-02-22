@@ -1,6 +1,8 @@
-package be.occam.colloseum.publisher.core;
+package be.occam.colloseum.publit;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,10 +28,14 @@ public class Publit {
 	protected String dataScriptUrl;
 	protected String assembleScriptUrl;
 	
+	protected String track;
+	
+	protected long timestamp;
+	
 	@XmlTransient
 	protected byte[] content;
 	
-	
+	protected String metaData;
 	
 	protected boolean canRender;
 
@@ -169,5 +175,25 @@ public class Publit {
 		this.assembleScriptUrl = assembleScriptUrl;
 		return this;
 	}
+
+	public String getTrack() {
+		return track;
+	}
+
+	public Publit setTrack(String track) {
+		this.track = track;
+		return this;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public Publit setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+		return this;
+	}
+	
+	
 	
 }

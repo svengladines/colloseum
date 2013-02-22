@@ -4,8 +4,8 @@ import java.net.URL;
 
 import javax.ws.rs.core.MediaType;
 
-import be.occam.colloseum.publisher.core.IPublisher;
-import be.occam.colloseum.publisher.core.Publit;
+import be.occam.colloseum.publisher.IPublisher;
+import be.occam.colloseum.publit.Publit;
 
 import com.sun.jersey.api.core.HttpContext;
 

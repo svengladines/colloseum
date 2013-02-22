@@ -9,8 +9,8 @@ import java.io.OutputStreamWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import be.occam.colloseum.publisher.core.Publit;
 import be.occam.colloseum.publisher.core.storage.IPublitStorage;
+import be.occam.colloseum.publit.Publit;
 
 @Component
 public class FileStorage implements IPublitStorage {
