@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    
+    <link href="css/togo-time.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src="javascript/jQueryWithoutDollar-1.6.4.min.js"></script>
+
+	<title>Colloseum</title>
+
+</head>
+
+  <body>
+  
+	  <script>
+	  	$jq = jQuery.noConflict();
+	  	var publit = new Object();
+	  </script>
+		
+	<div class="jumbotron masthead">
+	
+	  <div class="container">
+	    <h2><span id="time">Time's Up</span></h2>
+	    
+	     <p>
+	     	&nbsp;
+	     </p>
+	    <p>
+	      <a id="nxt" href="javascript:void(0)" class="btn btn-primary btn-large">TIA</a>
+	    </p>
+	    <ul class="masthead-links">
+		<li>
+			<a id="play"></a>
+		</li>
+	    </ul>
+	  </div>
+	  
+	</div>
+	
+	<script>
+	
+	$jq("#nxt").click( function( ) {
+
+		$jq.ajax( {
+				type: "get",
+				url: "http://www.occam.be/colloseum-publisher-rs-1.0-LATEST-SNAPSHOT/rs/publits?pick=true",
+			    processData: false,
+			    dataType:"json",
+				success: function( publit ) {
+					
+					$jq("#time").html( publit.publit.title );
+					
+					if ( publit.publit.play ) {
+						$jq("#play").attr("href", publit.publit.play ).html("play");
+					}
+					else {
+						$jq("#play").html("");
+					}
+					
+				  }
+				}
+			);
+	});
+	
+	</script>
+
+</body>
+
+</html>
