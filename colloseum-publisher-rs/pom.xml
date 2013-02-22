@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<artifactId>parent-pom</artifactId>
 		<groupId>be.occam</groupId>
@@ -14,20 +15,6 @@
   	<description>colloseum-publisher-rs</description>
 
 	<dependencies>
-	
-		<dependency>
-			<type>pom</type>
-			<groupId>be.kuleuven.toledo</groupId>
-			<artifactId>springframework-deps</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<type>pom</type>
-			<groupId>be.kuleuven.toledo</groupId>
-			<artifactId>jersey-deps</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
 		
 		<dependency>
 			<type>jar</type>
@@ -43,28 +30,6 @@
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publisher-registry</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.test</groupId>
-			<artifactId>jtest</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>${com.sun.jersey.version}</version>
-		</dependency>
-
 	</dependencies>
 
 </project>
