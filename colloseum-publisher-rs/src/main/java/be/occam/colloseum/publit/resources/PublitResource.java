@@ -1,4 +1,4 @@
-package be.occam.colloseum.publisher.rs.resources;
+package be.occam.colloseum.publit.resources;
 
 import javax.annotation.Resource;
 import javax.ws.rs.DELETE;
@@ -9,14 +9,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.Providers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import be.occam.colloseum.publisher.core.Publit;
-import be.occam.colloseum.publisher.core.storage.IPublitStorage;
+import be.occam.colloseum.application.ProvidersRegistry;
+import be.occam.colloseum.publisher.core.util.URIUtil;
+import be.occam.colloseum.publit.Publit;
+import be.occam.colloseum.publit.repository.IPublitRepository;
 
 import com.sun.jersey.api.core.HttpContext;
 
@@ -29,15 +32,15 @@ public class PublitResource {
 		= LoggerFactory.getLogger( PublitResource.class );
 	
 	@Resource
-	private IPublitStorage publitStorage;
+	protected IPublitRepository publitRepository;
 	
 	@GET
-	public Publit get(@PathParam( "id" ) String id, @Context HttpContext httpContext ) {
+	public Publit get( @PathParam( "id" ) String id, @Context HttpContext httpContext ) {
 		
 		this.logger.info( "get, uri =[{}]", httpContext.getUriInfo().getRequestUri() );
 		
 		Publit publit
-			= this.publitStorage.load( id );
+			= this.publitRepository.findOne( id );
 		
 		return publit;
 		
@@ -56,8 +59,9 @@ public class PublitResource {
 		}
 		
 		publit.setId( id );
+		publit.setUrl( URIUtil.url( httpContext, publit ).toString() );
 				
-		this.publitStorage.persist( publit );
+		this.publitRepository.persist( publit );
 		
 		return publit;
 		
@@ -71,9 +75,16 @@ public class PublitResource {
 		Publit publit
 			= this.get( id , httpContext );
 		
-		this.publitStorage.delete( publit );
+		// this.publitRepository.delete( publit );
 		
 		return publit;
+		
+	}
+	
+	@Context
+	public void setProviders(Providers providers) {
+		
+		ProvidersRegistry.register( providers );
 		
 	}
 	

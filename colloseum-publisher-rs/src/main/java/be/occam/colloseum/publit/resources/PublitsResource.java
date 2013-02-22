@@ -1,33 +1,33 @@
-package be.occam.colloseum.publisher.rs.resources;
+package be.occam.colloseum.publit.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.Providers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import be.occam.colloseum.publisher.core.IPublisher;
-import be.occam.colloseum.publisher.core.Publit;
-import be.occam.colloseum.publisher.core.storage.IPublitStorage;
-import be.occam.colloseum.publisher.core.storage.impl.FileStorage;
-import be.occam.colloseum.publisher.registry.PublisherRegistry;
+import be.occam.colloseum.application.ProvidersRegistry;
+import be.occam.colloseum.publisher.core.util.URIUtil;
+import be.occam.colloseum.publit.Publit;
+import be.occam.colloseum.publit.repository.IPublitRepository;
 
 import com.sun.jersey.api.core.HttpContext;
-import com.sun.jersey.multipart.FormDataBodyPart;
-import com.sun.jersey.multipart.FormDataMultiPart;
 
 @Path("publits")
 @Component
@@ -40,139 +40,72 @@ public class PublitsResource {
 	protected final Publit[] array 
 		= new Publit[] {};
 	
-	@Resource
-	protected PublisherRegistry publisherRegistry;
+	protected Providers providers;
 	
-	protected IPublitStorage publitStorage
-		= new FileStorage();
+	@Resource
+	protected IPublitRepository publitRepository;
+	
+	@OPTIONS
+	public Response options() {
+		
+		return Response.ok()
+			.header("Access-Control-Allow-Origin","*")
+			.header("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
+			.header("Access-Control-Allow-Headers", "Accept,Content-Type")
+			.build();
+		
+	}
 	
 	@GET
-	public Response get(@Context HttpContext httpContext ) {
+	public Response get(@Context HttpContext httpContext, @QueryParam("track") String track, @QueryParam("pick") Boolean pick ) {
 		
 		this.logger.info( "get, uri =[{}]", httpContext.getUriInfo().getRequestUri() );
 		
-		return Response.ok().build();
+		List<Publit> publits = new ArrayList<Publit>();
+		
+		if ( track == null ) {
+			publits.addAll( this.publitRepository.findAll() );
+		}
+		else {
+			publits.addAll( this.publitRepository.findByTrack( track ) );
+		}
+		
+		if ( pick != null && pick.booleanValue() && (! publits.isEmpty() ) ) {
+			
+			Publit picked = publits.get( new Random().nextInt( publits.size() ) );
+			publits.clear();
+			publits.add( picked );
+			
+		}
+		
+		return Response.ok()
+		.header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
+		.entity( publits.toArray( this.array ) ).build();
 		
 	}
 	
 	@POST
-	@Consumes( { MediaType.MULTIPART_FORM_DATA } )
-	public Response post( FormDataMultiPart form, @Context HttpContext httpContext ) {
+	public Response post( Publit publit, @Context HttpContext httpContext, @Context Providers providers ) {
 		
 		try {
 			
-			FormDataBodyPart filePart  
-				= form.getField( "file" );
+			this.logger.info( "post" );
 			
-			Publit publit
-				= new Publit();
+			setProviders( providers );
 			
-			byte[] content 
-				= null;
+			String id
+				= UUID.randomUUID().toString();
 			
-			if ( filePart != null ) {
-		
-				content
-					= filePart.getEntityAs( byte[].class );
+			publit.setId( id  ); 
+			publit.setUrl( URIUtil.url( httpContext, publit ).toString() );
+			publit.setTimestamp( System.currentTimeMillis() );
 			
-				logger.debug( "content bytes: #[{}]", content.length );
+			publit = this.publitRepository.persist( publit );
 				
-				publit.setContent( content );
-				publit.setUrl( new StringBuilder("file://").append( filePart.getFormDataContentDisposition().getFileName() ).toString() );
-				
-			}
-			else {
-				
-				FormDataBodyPart dataPart
-					= form.getField( "data" );
-			
-				String data
-					= dataPart != null ? dataPart.getValue() : null;
-					
-				publit.setData( data );
-				
-			}
-			
-			FormDataBodyPart titlePart
-				= form.getField( "title" );
-			
-			String title
-				= titlePart != null ? titlePart.getValue() : null;
-			
-			FormDataBodyPart descriptionPart
-				= form.getField( "description" );
-		
-			String description
-				= descriptionPart != null ? descriptionPart.getValue() : null;
-			
-			publit
-					.setTitle( title )
-					.setDescription( description );
-			
-			FormDataBodyPart createPart
-				= form.getField( "create" );
-		
-			boolean create
-				= createPart != null ? Boolean.valueOf( createPart.getValue() ) : false;
-				
-			if ( create ) {
-				
-				String id
-					= UUID.randomUUID().toString();
-				
-				publit.setId( id  ); 
-				
-			}
-			
 			Response response
-				= null;
-			
-			IPublisher[] publishers 
-				= this.publisherRegistry.list();
-			
-			for ( IPublisher publisher : publishers ) {
-				
-				if ( publisher.accept( publit , httpContext) ) {
-					
-					Publit published 
-						= publisher.publish( publit, httpContext );
-					
-					if ( create ) {
-						
-						StringBuilder b
-							= new StringBuilder( httpContext.getUriInfo().getRequestUri().toString() ).append( "/" ).append( publit.getId() );
-						
-						logger.info( "[{}]; create", published );
-					
-						this.publitStorage.persist( published );
-						
-						response
-							= Response
-								.created( URI.create( b.toString() ) )
-								.entity( published )
-								.build();
-						
-					}
-					else {
-						response 
-							= Response
-							.ok( )
-							.entity( published )
-							.build();
-					}
-					
-					break;
-				
-				}
-				
-			}
-			
-			if ( response == null ) {
-				
-				response
-					= Response.status( Status.NOT_ACCEPTABLE ).build();
-				
-			}
+				= Response.created( new URI( publit.getUrl() ) )
+				.header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
+				.entity( publit ).build();
 			
 			return response;
 			
@@ -183,6 +116,15 @@ public class PublitsResource {
 			throw new WebApplicationException( e );
 		}
 			
+	}
+	
+	@Context
+	public void setProviders(Providers providers) {
+		
+		this.logger.info( "setproviders" );
+		
+		ProvidersRegistry.register( providers );
+		
 	}
 	
 }

@@ -8,13 +8,20 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
      default-autowire="byName">
+     
+    <bean
+    	id="props"
+    	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+		<property name="locations">
+			<list>
+				<value>${configPath}/colloseum-publisher-rs.properties</value>
+			</list>
+		</property>
+	</bean>
     
-    <context:component-scan base-package="be.occam.colloseum.publisher"/>
+    <context:component-scan base-package="be.occam.colloseum.publit"/>
     
-    <bean 
-    	id="publisherRegistry"
-    	class="be.occam.colloseum.publisher.registry.PublisherRegistry"
-    	factory-method="getInstance">
-    </bean>
+    
 	
 </beans>

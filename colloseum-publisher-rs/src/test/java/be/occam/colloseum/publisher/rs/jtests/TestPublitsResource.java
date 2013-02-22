@@ -7,9 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import be.occam.colloseum.publisher.registry.PublisherRegistry;
-import be.occam.colloseum.publisher.registry.impl.RemarkPublisher;
-import be.occam.colloseum.publisher.youtube.YouTubePublisher;
+import be.occam.colloseum.publit.Publit;
 import be.occam.test.jtest.JTest;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -33,11 +31,48 @@ public class TestPublitsResource extends JTest {
 	@BeforeClass
 	public static void setup() {
 		
-		PublisherRegistry.getInstance().register( new YouTubePublisher() ).register( new RemarkPublisher()  );
+		// PublisherRegistry.getInstance().register( new YouTubePublisher() ).register( new RemarkPublisher()  );
 		
 	}
 	
 	@Test
+	public void testPost() {
+		
+		String url 
+			= this.baseResourceUrl().append( this.path ).toString();
+	
+		WebResource resource
+			= this.client.resource( url );
+		
+		logger.debug( "url :[{}]", url );
+		
+		String title
+			= "You'll neeever walk alone";
+	
+		Publit publit
+			= new Publit().setTitle( title ).setPlay( "http://www.youtube.com/watch?v=WfP2ABaKZIY" ).setTrack( "t-1" );
+
+		ClientResponse response
+			= resource
+				.entity( publit, MediaType.APPLICATION_JSON_TYPE )
+				.accept( MediaType.APPLICATION_JSON_TYPE )
+				.post( ClientResponse.class );
+	
+		assertEquals( 201, response.getStatus() );
+		
+		ClientResponse getResponse
+			= resource
+			.accept( MediaType.APPLICATION_JSON_TYPE )
+			.get( ClientResponse.class );
+		
+		// String created
+		//	= response.getEntity( String.class );
+		
+		// logger.debug( "publit: [{}]", publit );
+		
+		
+	}
+	
 	public void testPostRemark() {
 		
 		String url 
@@ -127,11 +162,6 @@ public class TestPublitsResource extends JTest {
 		logger.debug( "publit: [{}]", publit );
 		
 		
-	}
-	
-	@Test
-	public void testIndex() throws Exception {
-		Thread.sleep( 1200000 );
 	}
 	
 }
