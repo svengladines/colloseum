@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap</title>
+    <title>Togo Time</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,23 +32,23 @@
 	  <script>
 	  	$jq = jQuery.noConflict();
 	  	var publit = new Object();
+	  	var progress = false;
+	  	var timer;
 	  </script>
 		
-	<div class="jumbotron masthead">
+	<div id="jumbo" class="jumbotron masthead">
 	
 	  <div class="container">
 	    <h2><span id="time">Time's Up</span></h2>
 	    
-	     <p>
-	     	&nbsp;
-	     </p>
+	   <br/>
+	   <br/>
+	     
 	    <p>
-	      <a id="nxt" href="javascript:void(0)" class="btn btn-primary btn-large">TIA</a>
+	      <a id="nxt" href="javascript:void(0)" class="btn btn-primary btn-large ">TIA</a>
 	    </p>
 	    <ul class="masthead-links">
-		<li>
-			<a id="play"></a>
-		</li>
+			<li id="lnk"></li>
 	    </ul>
 	  </div>
 	  
@@ -56,27 +56,94 @@
 	
 	<script>
 	
-	$jq("#nxt").click( function( ) {
-
+	function done( publit ) {
+		
+		publit.canRender = false;
+		
 		$jq.ajax( {
-				type: "get",
-				url: "http://www.occam.be/colloseum-publisher-rs-1.0-LATEST-SNAPSHOT/rs/publits?pick=true",
-			    processData: false,
-			    dataType:"json",
-				success: function( publit ) {
-					
-					$jq("#time").html( publit.publit.title );
-					
-					if ( publit.publit.play ) {
-						$jq("#play").attr("href", publit.publit.play ).html("play");
-					}
-					else {
-						$jq("#play").html("");
-					}
-					
-				  }
-				}
-			);
+			type: "put",
+			url:"http://www.occam.be/colloseum/rs/publits/" + publit.id,
+			dataType: "json",
+			contentType: "application/json",
+			data: JSON.stringify( publit ),
+		    dataType:"json",
+			success: function( publit ) {
+				
+			  }
+	
+			}
+		);
+		
+	}
+	
+	function decrease( div, button, value, publit, links ) {
+
+		button.html( "" +  value );
+		
+		if ( value > 0 ) {
+			
+			var timer = setTimeout( function() {
+				decrease( div, button, value -1, publit, links )
+			}, 1000 );
+			
+			if ( value == 11 ) {
+				
+				// alert("10");
+				button.removeClass("btn-success").addClass("btn-warning");
+				
+				div.append( $jq( "<audio>" ).attr("id","snd").attr("autoplay","autoplay").attr( "src","http://www.freesound.org/data/previews/82/82986_7037-lq.mp3" ) );
+				
+			}
+			
+		}
+		else {
+			
+			button.removeClass("btn-warning").addClass("btn-danger");
+			
+			done( publit );
+			
+			if ( publit.play ) {
+				
+				links.html( $jq("<a/>").attr("href", publit.play ).html("hit me") );
+				
+			}
+			else {
+				links.html( $jq("<a/>").attr("href", "javascript:window.location.reload()" ).html("hit me") );
+				
+			}
+			
+		}
+	    
+	}
+	
+	$jq("#nxt").click( function( ) {
+		
+		if ( progress == true ) {
+			
+			clearTimeout( timer );
+			$jq("#snd").remove();
+			progress = false;
+			
+		}
+		else {
+
+			$jq.ajax( {
+					type: "get",
+					url: "http://www.occam.be/colloseum/rs/publits?pick=true",
+				    processData: false,
+				    dataType:"json",
+					success: function( publit ) {
+						
+						$jq("#time").html( publit.publit.title );
+						
+						$jq("#nxt").addClass( "btn-success" );
+						progress = true;
+						
+						decrease( $jq("#jumbo"), $jq("#nxt"), 30, publit.publit, $jq("#lnk") );
+						
+					  }
+			});
+		}
 	});
 	
 	</script>
