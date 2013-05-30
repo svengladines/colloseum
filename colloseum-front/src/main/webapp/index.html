@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Le styles -->
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    
+    <link href="css/togo-time.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
     
     <script type="text/javascript" src="javascript/jQueryWithoutDollar-1.6.4.min.js"></script>
 
@@ -26,99 +34,53 @@
 	  	var publit = new Object();
 	  </script>
 		
-		<div class="container-fluid">
-		    
-		    <div class="row-fluid">
-		
-				<div class="span2">
-				
-				</div>
-				
-				<div class="span4">
-				
-					<form
-						id="form"
-						class="well">
-						
-						<div class="control-group">
-            				<label class="control-label" for="textarea">Textarea</label>
-           						<div class="controls">
-              						<textarea id="dropzone" class="input-xxlarge"  rows="3" >http://www.youtube.com/watch?v=1H5loYi6wVc</textarea>
-            					</div>
-          				</div>
-						<input id="post" type="button" class="btn"/>
-						
-					</form>
-					
-					<div>
-          				
-						<span id="title"></span>
-						<img id="preview"/>
-											
-						<button id="publish" type="submit" class="btn btn-primary" data-loading-text="${busy}">publiceer</button>
-				
-					</div>
-				
-				<div class="span2">
-				
-				</div>
-				
-			</div>
-			
-			<div id="thedata">
-			
-			</div>
-			
-			</div>
-		
-		</div>
-		
-		<script>
-		
-			$jq("#post").click( function( ) {
-				
-				var stuff = $jq("#dropzone").val();
-				
-				// $jq.ajax( {
-				// 	type: "options",
-				//	url:"http://localhost:8091/colloseum-publisher-youtube/rs/publit"
-				// });
+	<div class="jumbotron masthead">
+	
+	  <div class="container">
+	    <h2><span id="time">Time's Up</span></h2>
+	    
+	     <p>
+	     	&nbsp;
+	     </p>
+	    <p>
+	      <a id="nxt" href="javascript:void(0)" class="btn btn-primary btn-large">TIA</a>
+	    </p>
+	    <ul class="masthead-links">
+		<li>
+			<a id="play"></a>
+		</li>
+	    </ul>
+	  </div>
+	  
+	</div>
+	
+	<script>
+	
+	$jq("#nxt").click( function( ) {
 
-				$jq.ajax( {
-						type: "get",
-						url:"http://localhost:8091/colloseum-publisher-youtube/rs/publit?uri=" + encodeURI( stuff ),
-					    processData: false,
-					    dataType:"json",
-						success: function( publit ) {
-							
-							$jq("#thedata").append( $jq("<script/>").attr( "src", publit.assembleScriptUrl ) );
-							$jq("#thedata").append( $jq("<script/>").attr( "src", publit.dataScriptUrl ) );
-							
-						  }
-						}
-					);
-			});
-			
-			$jq("#publish").click( function( ) {
-				
-				$jq.ajax( {
-						type: "post",
-						url:"http://localhost:8091/colloseum-publisher-rs/rs/publits",
-						dataType: "json",
-						contentType: "application/json",
-						data: JSON.stringify( publit ),
-					    dataType:"json",
-						success: function( publit ) {
-							
-							alert("whoohoo!");
-							
-						  }
-				
-						}
-					);
-			});
-		
-		</script>
+		$jq.ajax( {
+				type: "get",
+				url: "http://www.occam.be/colloseum-publisher-rs-1.0-LATEST-SNAPSHOT/rs/publits?pick=true",
+			    processData: false,
+			    dataType:"json",
+				success: function( publit ) {
+					
+					$jq("#time").html( publit.publit.title );
+					
+					if ( publit.publit.play ) {
+						$jq("#play").attr("href", publit.publit.play ).html("play");
+					}
+					else {
+						$jq("#play").html("");
+					}
+					
+				  }
+				}
+			);
+	});
+	
+	</script>
+
 </body>
 
 </html>
