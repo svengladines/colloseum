@@ -19,6 +19,10 @@ public abstract class Action<T> {
 	public String getId() {
 		return id;
 	}
+	
+	public Action( T t ) {
+		this.subject = t;
+	}
 
 	public Action<T> setId(String id) {
 		this.id = id;

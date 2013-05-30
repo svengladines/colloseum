@@ -10,7 +10,6 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
-import javax.ws.rs.ext.Providers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import be.occam.colloseum.action.Action;
 import be.occam.colloseum.action.ActionDTO;
 import be.occam.colloseum.action.repository.IActionRepository;
 import be.occam.colloseum.application.ProvidersRegistry;
@@ -105,7 +103,10 @@ public class DefaultActionRepository implements IActionRepository {
 			}
 			
 			StringBuilder b
-				= new StringBuilder( this.directory ).append( File.separator ).append( action.getId() );
+				= new StringBuilder( this.directory )
+					.append( File.separator )
+					.append( action.getId() )
+					.append( ".json" );
 			
 			FileOutputStream fos
 				= new FileOutputStream( b.toString() );
@@ -119,6 +120,12 @@ public class DefaultActionRepository implements IActionRepository {
 			throw new RuntimeException( e ); 
 		}
 		
+	}
+
+	@Override
+	public List<ActionDTO> findByActor(String person) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 }

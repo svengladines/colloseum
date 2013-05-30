@@ -38,7 +38,7 @@ public class ActionsResource {
 	public List<ActionDTO> get( ) {
 	
 		List<ActionDTO> actions 
-			= Arrays.asList( );
+			= this.actionService.findAll();
 		
 		return actions;
 		
