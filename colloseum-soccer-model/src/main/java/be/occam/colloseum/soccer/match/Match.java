@@ -1,5 +1,7 @@
 package be.occam.colloseum.soccer.match;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,11 +12,29 @@ import be.occam.colloseum.soccer.team.Team;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Match {
 	
+	public static enum RegistrationStatus {
+		None, Neutral, Low, Critical, OK, Overdose
+	}
+	
 	protected String id;
 	protected String name;
 	
 	protected Team homeTeam;
 	protected Team awayTeam;
+	
+	protected Date starts;
+	
+	protected int players;
+	
+	protected int homeTeamScore;
+	protected int awayTeamScore;
+	
+	protected boolean yetToCome;
+	protected boolean firstToCome;
+	
+	protected RegistrationStatus registrationStatus;
+	
+	protected boolean deviantKickOff;
 
 	public String getId() {
 		
@@ -55,5 +75,75 @@ public class Match {
 		this.awayTeam = awayTeam;
 		return this;
 	}
+
+	public Date getStarts() {
+		return starts;
+	}
+
+	public Match setStarts(Date starts) {
+		this.starts = starts;
+		return this;
+	}
+
+	public boolean isFirstToCome() {
+		return firstToCome;
+	}
+
+	public Match setFirstToCome(boolean firstToCome) {
+		this.firstToCome = firstToCome;
+		return this;
+	}
+
+	public int getPlayers() {
+		return players;
+	}
+
+	public RegistrationStatus getRegistrationStatus() {
+		return registrationStatus;
+	}
+
+	public Match setRegistrationStatus(RegistrationStatus registrationStatus) {
+		this.registrationStatus = registrationStatus;
+		return this;
+	}
+
+	public boolean getIsYetToCome() {
+		return yetToCome;
+	}
+
+	public Match setYetToCome(boolean yetToCome) {
+		this.yetToCome = yetToCome;
+		return this;
+	}
+
+	public int getHomeTeamScore() {
+		return homeTeamScore;
+	}
+
+	public Match setHomeTeamScore(int homeTeamScore) {
+		this.homeTeamScore = homeTeamScore;
+		return this;
+	}
+
+	public int getAwayTeamScore() {
+		return awayTeamScore;
+	}
+
+	public Match setAwayTeamScore(int awayTeamScore) {
+		this.awayTeamScore = awayTeamScore;
+		return this;
+	}
+
+	public boolean getIsDeviantKickOff() {
+		return deviantKickOff;
+	}
+
+	public Match setDeviantKickOff(boolean deviantKickOff) {
+		this.deviantKickOff = deviantKickOff;
+		return this;
+	}
+	
+	
+	
 	
 }

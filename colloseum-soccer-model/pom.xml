@@ -37,6 +37,13 @@
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-calendar</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
   	</dependencies>
   	
 </project>
