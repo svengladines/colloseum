@@ -1,25 +1,25 @@
-package be.occam.colloseum.core.rs.jtests;
+package be.occam.colloseum.soccer.rs.jtests;
 
 import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
+import org.springframework.http.ResponseEntity;
 
+import be.occam.colloseum.soccer.match.Match;
 import be.occam.colloseum.soccer.team.Team;
 import be.occam.test.jtest.JTest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class TestTeamsResource extends JTest {
-	
-	/*
+public class TestMatchesResource extends JTest {
 	
 	private final String path
-		= "teams";
+		= "/rs/matches";
 	
-	public TestTeamsResource() {
+	public TestMatchesResource() {
 		super( "/colloseum-soccer-rs" );
 	}
 	
@@ -27,27 +27,16 @@ public class TestTeamsResource extends JTest {
 	public void testGet() {
 		
 		String url 
-			= this.baseResourceUrl().append( this.path ).toString();
+			= this.baseUrl().append( this.path ).toString();
 	
-		WebResource resource
-			= this.client.resource( url );
-		
-		logger.debug( "url :[{}]", url );
+		ResponseEntity<Match[]> response 
+			= this.template.getForEntity(url, Match[].class );
 
-		ClientResponse response
-			= resource
-				.accept( MediaType.APPLICATION_JSON_TYPE )
-				.get( ClientResponse.class );
-	
-		assertEquals( 200, response.getStatus() );
-		
-		String json
-			= response.getEntity( String.class );
-		
-		logger.debug( "teams: [{}]", json );
+		assertEquals( 200, response.getStatusCode().value()  );
 		
 	}
 	
+	/*
 	@Test
 	public void testPost() {
 		
@@ -80,7 +69,6 @@ public class TestTeamsResource extends JTest {
 		
 		
 	}
-	
 	*/
 	
 }

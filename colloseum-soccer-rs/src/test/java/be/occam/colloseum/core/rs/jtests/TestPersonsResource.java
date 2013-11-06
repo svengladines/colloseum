@@ -16,6 +16,8 @@ import com.sun.jersey.api.client.WebResource;
 
 public class TestPersonsResource extends JTest {
 	
+	/*
+	
 	private final String path
 		= "persons";
 	
@@ -89,5 +91,7 @@ public class TestPersonsResource extends JTest {
 		}
 		
 	}
+	
+	*/
 	
 }

@@ -7,16 +7,18 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.junit.Ignore;
 import org.slf4j.LoggerFactory;
 
 import be.occam.colloseum.util.ConfigurationProfiles;
 import be.occam.test.jtest.JTest;
 
+@Ignore
 public class RunLocal_Production extends JTest {
 	
 	public RunLocal_Production() {
-		super("/colloseum-soccer");
-		this.forcePort = 8089;
+		super("/colloseum-soccer-rs");
+		this.forcePort = 8088;
 	}
 	
 	public void test( ) throws Exception {

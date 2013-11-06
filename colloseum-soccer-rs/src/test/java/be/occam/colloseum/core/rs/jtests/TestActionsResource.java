@@ -19,6 +19,7 @@ import com.sun.jersey.api.client.WebResource;
 
 public class TestActionsResource extends JTest {
 	
+	/*
 	private final String path
 		= "actions";
 	
@@ -83,5 +84,6 @@ public class TestActionsResource extends JTest {
 		this.logger.info( "actions.#[{}]", actions.length );
 		
 	}
+	*/
 	
 }

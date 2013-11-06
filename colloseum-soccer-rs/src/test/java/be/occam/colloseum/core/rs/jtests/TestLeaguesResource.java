@@ -14,6 +14,8 @@ import com.sun.jersey.api.client.WebResource;
 
 public class TestLeaguesResource extends JTest {
 	
+	/*
+	
 	private final String path
 		= "leagues";
 	
@@ -78,5 +80,7 @@ public class TestLeaguesResource extends JTest {
 		
 		
 	}
+	
+	*/
 	
 }
