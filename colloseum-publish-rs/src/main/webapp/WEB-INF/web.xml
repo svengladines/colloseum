@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <javaee:display-name>Colloseum Publisher Rest API</javaee:display-name>
+  <listener>
+    <javaee:listener-class>org.springframework.web.util.Log4jConfigListener</javaee:listener-class>
+  </listener>
+  <listener>
+    <javaee:listener-class>org.springframework.web.context.ContextLoaderListener</javaee:listener-class>
+  </listener>
+  <context-param>
+    <javaee:param-name>log4jExposeWebAppRoot</javaee:param-name>
+    <javaee:param-value>false</javaee:param-value>
+  </context-param>
+  <context-param>
+    <javaee:param-name>log4jConfigLocation</javaee:param-name>
+    <javaee:param-value>classpath:log4j.properties</javaee:param-value>
+  </context-param>
+  <context-param>
+    <javaee:param-name>contextConfigLocation</javaee:param-name>
+    <javaee:param-value>classpath:colloseum-publisher-rs-applicationContext.xml</javaee:param-value>
+  </context-param>
+  <context-param>
+    <javaee:param-name>webAppRootKey</javaee:param-name>
+    <javaee:param-value>colloseum-publisher-rs.root</javaee:param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>jersey</servlet-name>
+    <servlet-class>
+			com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+    <init-param>
+      <javaee:param-name>com.sun.jersey.config.property.packages</javaee:param-name>
+      <javaee:param-value>be.occam.colloseum.publit</javaee:param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jersey</servlet-name>
+    <url-pattern>/rs/*</url-pattern>
+  </servlet-mapping>
+</web-app>
