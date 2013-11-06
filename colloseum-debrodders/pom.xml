@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<artifactId>parent-pom</artifactId>
+		<groupId>be.occam</groupId>
+		<version>1.0-LATEST-SNAPSHOT</version>
+	</parent>
+	
+ 	<groupId>be.occam.colloseum</groupId>
+ 	<artifactId>colloseum-debrodders</artifactId>
+  	<version>1.0-LATEST-SNAPSHOT</version>
+  	<packaging>war</packaging>
+  	<name>colloseum-debrodders</name>
+  	<description>colloseum-debrodders</description>
+
+	<dependencies>
+	
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam</groupId>
+			<artifactId>occam-utils</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-core-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-core-rs</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-publish-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-publish-rs</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-publish-filesystem</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- De Brodders are a soccer team, yes! -->
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-soccer-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-soccer-rs</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jstl</groupId>
+ 			<artifactId>jstl</artifactId>
+  			<version>1.2</version>
+  			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-core-filesystem</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.test</groupId>
+			<artifactId>jtest</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
