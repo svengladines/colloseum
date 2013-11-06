@@ -9,24 +9,18 @@
  	<groupId>be.occam.colloseum</groupId>
  	<artifactId>colloseum-core-rs</artifactId>
   <version>1.0-LATEST-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>colloseum-core-rs</name>
   <description>colloseum-core-rs</description>
 
 	<dependencies>
 	
 		<dependency>
-			<type>pom</type>
-			<groupId>be.kuleuven.toledo</groupId>
-			<artifactId>springframework-deps</artifactId>
+			<type>jar</type>
+			<groupId>be.occam</groupId>
+			<artifactId>occam-utils</artifactId>
 			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<type>pom</type>
-			<groupId>be.kuleuven.toledo</groupId>
-			<artifactId>jersey-deps</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 		
 		<dependency>
