@@ -1,12 +1,14 @@
 package be.occam.colloseum.publisher.youtube.jtests;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import be.occam.test.jtest.JTest;
 
-public class TestIndex extends JTest {
+@Ignore
+public class TestYouTubeIndex extends JTest {
 	
-	public TestIndex() {
+	public TestYouTubeIndex() {
 		
 		super( "/colloseum-publisher-youtube" );
 		this.forcePort = 8091;

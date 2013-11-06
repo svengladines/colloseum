@@ -5,16 +5,16 @@ import java.io.InputStreamReader;
 import java.net.URI;
 
 import javax.annotation.Resource;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import be.occam.colloseum.publisher.IPublisher;
 import be.occam.colloseum.publisher.youtube.YouTubeClient.Video;
-import be.occam.colloseum.publisher.core.IPublisher;
+import be.occam.colloseum.publit.Publit;
+import be.occam.colloseum.publit.repository.IPublitRepository;
 
-import com.google.api.client.testing.json.AbstractJsonGeneratorTest.Feed;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -23,9 +23,9 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.core.HttpContext;
 import com.sun.jersey.atom.rome.impl.provider.entity.AtomEntryProvider;
 import com.sun.jersey.atom.rome.impl.provider.entity.AtomFeedProvider;
+import com.sun.syndication.feed.atom.Feed;
 
 
-@Path( "publishers/youtube" )
 public class YouTubePublisher implements IPublisher {
 
 	private final Logger logger
@@ -33,9 +33,9 @@ public class YouTubePublisher implements IPublisher {
 
 	protected final String PARAM_VIDEO 
 		= "v=";
-
+	
 	@Resource
-	IPublitStorage publitStorage;
+	IPublitRepository publitRepository;
 	
 	@Override
 	public boolean accept( Publit publit, HttpContext httpContext ) {
@@ -53,8 +53,8 @@ public class YouTubePublisher implements IPublisher {
 		boolean accept
 			= "www.youtube.com".equals( uri.getHost() );
 		
-		String id
-			= this.videoParam( uri );
+		// String id
+		//	 = this.videoParam( uri );
 	
 		return accept;
 	
@@ -71,7 +71,7 @@ public class YouTubePublisher implements IPublisher {
 		
 		try {
 			Publit publit
-				= this.publitStorage.load( id );
+				= this.publitRepository.findOne( id );
 		
 			String uri
 				= publit.getData();
@@ -155,11 +155,6 @@ public class YouTubePublisher implements IPublisher {
 				= new StringBuilder( "http://img.youtube.com/vi/" ).append( id ).append( "/1.jpg" ).toString();
 			
 			publit.setPreview( preview );
-			
-			String dt
-				= this.data( id );
-			
-			publit.setData( dt );
 			
 			String play
 				= new StringBuilder( "http://gdata.youtube.com/feeds/api/videos/").append( id ).toString();
