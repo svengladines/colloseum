@@ -10,6 +10,7 @@ public class Event {
 	protected Date start;
 	protected Date end;
 	protected String subject;
+	protected String description; 
 	
 	public Date getStart() {
 		return start;
@@ -36,6 +37,14 @@ public class Event {
 	public Event setSubject(String subject) {
 		this.subject = subject;
 		return this;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

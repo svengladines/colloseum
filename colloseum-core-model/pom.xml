@@ -13,5 +13,26 @@
   	<packaging>jar</packaging>
   	<name>colloseum-core-model</name>
   	<description>colloseum-core-model</description>
+  	<properties>
+  		<hibernate-jpa-api-version>1.0.1.Final</hibernate-jpa-api-version>
+  	 	<spring-data-jpa>1.2.0.RELEASE</spring-data-jpa>
+  	 	<hibernate.version>3.6.10.Final</hibernate.version>
+  	</properties>
+  	
+  	<dependencies>
+  	
+	  	<dependency>
+			    <groupId>org.hibernate.javax.persistence</groupId>
+			    <artifactId>hibernate-jpa-2.0-api</artifactId>
+			    <version>${hibernate-jpa-api-version}</version>
+		</dependency>
+			
+		<dependency>
+	   			<groupId>org.springframework.data</groupId>
+	   			<artifactId>spring-data-jpa</artifactId>
+	   			<version>${spring-data-jpa}</version>
+		</dependency>
+	
+	</dependencies>
   	
 </project>
