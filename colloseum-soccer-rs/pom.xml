@@ -9,7 +9,7 @@
  	<groupId>be.occam.colloseum</groupId>
  	<artifactId>colloseum-soccer-rs</artifactId>
   <version>1.0-LATEST-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>colloseum-soccer-rs</name>
   <description>colloseum-soccer-rs</description>
 
@@ -33,6 +33,13 @@
 			<type>jar</type>
 			<groupId>be.occam.colloseum</groupId>
 			<artifactId>colloseum-core-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-soccer-model</artifactId>
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		

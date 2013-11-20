@@ -5,11 +5,10 @@ import be.occam.colloseum.soccer.match.Match;
 
 
 public class Player extends Person {
-
-	public Match whatIsTheNextMatch() {
-		
-		return new Match();
 	
+	public Player( String nick ) {
+		super();
+		this.nickName = nick;
 	}
-	
+
 }

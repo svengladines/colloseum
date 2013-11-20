@@ -1,14 +1,12 @@
 package be.occam.colloseum.soccer.match.resources;
 
-import static be.occam.colloseum.util.Resource.*;
+import static be.occam.colloseum.util.Resource.response;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.ext.Providers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import be.occam.colloseum.soccer.club.hats.Fixer;
 import be.occam.colloseum.soccer.match.Match;
 import be.occam.colloseum.soccer.match.actions.Plan;
-import be.occam.colloseum.soccer.match.repository.IMatchRepository;
 import be.occam.colloseum.util.Timing;
 
 @Controller
@@ -34,12 +31,6 @@ public class MatchesResource {
 		= LoggerFactory.getLogger( this.getClass() );
 	
 	protected Match[] array = {};
-	
-	@Context
-	protected Providers providers;
-	
-	// @Resource
-	protected IMatchRepository matchRepository;
 	
 	@Resource
 	Fixer fixer;

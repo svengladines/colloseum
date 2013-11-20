@@ -15,8 +15,6 @@ public class SpokesPerson extends Hat {
 	
 	@Resource
 	Fixer fixer;
-
-	
 	
 	@Resource
 	CuteGirlFromTheLeague cuteGirlFromTheLeague;

@@ -52,25 +52,4 @@ public class ApplicationConfig {
 		
 	}
 	
-	@Configuration
-	//@Profile({ConfigurationProfiles.PRODUCTION })
-	static class HatConfiguration {
-		
-		@Bean
-		public Fixer fixer() {
-			return new Fixer();
-		}
-		
-		@Bean
-		public CalendarGuy calendarGuy() {
-			return new CalendarGuy();
-		}
-		
-		@Bean
-		public CuteGirlFromTheLeague cuteGirlFromTheLeague() {
-			return new CuteGirlFromTheLeague();
-		}
-		
-	}
-	
 }
