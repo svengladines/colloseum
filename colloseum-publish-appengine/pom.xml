@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>be.occam</groupId>
+		<artifactId>occam-parent-pom</artifactId>
+		<version>1.0-LATEST-SNAPSHOT</version>
+	</parent>
+	
+ 	<groupId>be.occam.colloseum</groupId>
+ 	<artifactId>colloseum-publish-appengine</artifactId>
+  	<version>1.0-LATEST-SNAPSHOT</version>
+  	<packaging>jar</packaging>
+  	<name>colloseum-publish-appengine</name>
+  	<description>colloseum-publish-appengine</description>
+  	
+  	<properties>
+  		<datanucleus.jpa.version>3.1.1</datanucleus.jpa.version>
+  		<org.springframework.version>3.2.1.RELEASE</org.springframework.version>
+  	</properties>
+
+	<dependencies>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-core-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-publish-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>${datanucleus.jpa.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jpa</artifactId>
+            <version>${datanucleus.jpa.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+     	<dependency>
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>1.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-labs</artifactId>
+			<version>1.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<version>1.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-testing</artifactId>
+			<version>1.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+	</dependencies>
+	
+	<build>
+	
+	</build>
+	
+</project>
