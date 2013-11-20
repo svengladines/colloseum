@@ -9,7 +9,7 @@ function contemplate(tmpl_name) {
         var tmpl_url = tmpl_dir + '/' + tmpl_name + '.tmpl';
 
         var tmpl_string = "";
-        $.ajax({
+        $jq.ajax({
             url: tmpl_url,
             method: 'GET',
             async: false,

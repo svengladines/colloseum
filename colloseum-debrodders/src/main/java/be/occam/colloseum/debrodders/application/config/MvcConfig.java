@@ -10,8 +10,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import be.occam.colloseum.credential.resources.CredentialResource;
 import be.occam.colloseum.credential.resources.CredentialsResource;
 import be.occam.colloseum.debrodders.application.web.resources.DeBroddersResource;
+import be.occam.colloseum.publish.publit.resources.PublitResource;
 import be.occam.colloseum.publish.publit.resources.PublitsResource;
+import be.occam.colloseum.soccer.hitman.resources.HitMenResource;
 import be.occam.colloseum.soccer.match.resources.MatchesResource;
+import be.occam.colloseum.soccer.ranking.resources.RankingsResource;
 
 @EnableAsync
 @EnableWebMvc
@@ -35,6 +38,20 @@ public class MvcConfig {
 		MatchesResource matchesResource() {
 			
 			return new MatchesResource();
+			
+		}
+		
+		@Bean
+		RankingsResource rankingsResource() {
+			
+			return new RankingsResource();
+			
+		}
+		
+		@Bean
+		HitMenResource hitMenResource() {
+			
+			return new HitMenResource();
 			
 		}
 		
@@ -66,6 +83,12 @@ public class MvcConfig {
 			
 		}
 		
+		@Bean
+		PublitResource publitResource() {
+			
+			return new PublitResource();
+			
+		}
 		
 	}
 

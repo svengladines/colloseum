@@ -17,11 +17,7 @@
 	
     	<div class="row">
     
-    		<div id="left" class="span2">
-    			
-    		</div>
-    		
-    		<div id="right" class="span8">
+    		<div id="right" class="span12">
     			
     			<div class="row">
     				<form id="dropForm" class="form-inline">
@@ -33,7 +29,7 @@
    					</form>
     			</div>
     			
-    			<div id="publits class="row">
+    			<div id="publits" class="row">
     				
     			</div>
     			
@@ -51,21 +47,34 @@
   	<script src="javascript/backbone.js"></script>
   
   
-	  <script type="text/javascript">
+	<script type="text/javascript">
 	  	
-	  	var $jq = jQuery.noConflict();
+		var $jq = jQuery.noConflict();
 	  	
-	  </script>
+	</script>
+  
+  	<script src="javascript/publits.js"></script>
   
   	<script>
   	
+		var gather = function( publit ) {
+			
+			account.email = $jq("#email").val();
+			account.familyName = $jq("#familyName").val();
+			account.givenName = $jq("#givenName").val();
+			account.meta.expiry = moment( $jq("#expiryDate").val(), "DD.MM.YYYY" );
+			
+			return account;
+			
+		};
+  	
   		$jq("#drop").on("all", function( event ) {
-  			console.log("event detected, event is ", event );
+  			// console.log("event detected, event is ", event );
   		});
   	
 		$jq("#dropZone").on("input", function( event ) {
   			
-			console.log("input event detected, value is ", $jq(this).val() );
+			// console.log("input event detected, value is ", $jq(this).val() );
 			
 			var input
 				= $jq(this).val();
@@ -81,15 +90,62 @@
 		$jq("#dropForm").submit( function( event ) {
 			
 			event.preventDefault();
+			
+			var input
+				= $jq("#dropZone").val();
   			
-			console.log("form submit detected, value is ", $jq("#dropZone").val() );
+			console.log("form submit detected, value is ", input );
+			
+			if ( ( input.indexOf("http://") == 0 ) || (  input.indexOf("https://") == 0 ) ) {
+				
+				// post URL to server
+				publits.create( {url:input} );
+				
+			}
+			else {
+				publits.create( {title:input} );
+			}
 						
   		});
 		
+		var clickButtons = function ( ) {
+		
+			$jq(".btn-publish").click( function( ) {
+  			
+			var publit
+				= publits.get ( $jq(this).attr("data-publit") );
+			
+			if ( publit ) {
+				
+				publit.set( { status: "Published" } );
+				publit.save();
+				
+			}
+  			
+  			});
+			
+			$jq(".btn-publish-delete").click( function( ) {
+	  			
+				var publit
+					= publits.get ( $jq(this).attr("data-publit") );
+				
+				if ( publit ) {
+					
+					publit.destroy();
+					
+				}
+	  			
+	  			});
+		};
+		
+		var publits = publits();
+		var view = view( publits );
+		var router = router( publits );
+	
+		router.list( publits, clickButtons );
+		
   	</script>
   	
-  	<script src="javascript/publits.js"></script>
-
 </body>
 
 </html>

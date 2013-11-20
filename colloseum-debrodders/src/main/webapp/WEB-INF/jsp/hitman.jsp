@@ -17,25 +17,22 @@
 
 	<div class="container">
 	
-    	<div class="row-fluid">
+    	<div class="row">
     
-    		<div id="calendar" class="span12">
+    		<div id="hitmen" class="span12">
 
-			    <div id="main" class="calendar">
+			    <div id="main">
 			    
 			    <br/>
 			    
 			      <table class="table table-striped table-bordered">
 			      <thead>
 			      	<tr>
-			      		<th>Datum</th>
-			      		<th>Thuisploeg</th>
-			      		<th>Bezoekers</th>
-			      		<th>Aftrap</th>
-			      		<th>Uitslag</th>
+			      		<th>Speler</th>
+			      		<th>Goals</th>
 			      	</tr>
 			      </thead>
-			      <tbody id="matches">
+			      <tbody id="hitlist">
 			      
 			      </tbody>
 			      </table>
@@ -45,9 +42,26 @@
 			
 			  </div>
    	 		</div>
+   	 		
    	 	</div>
    	 </div>
+  
+   <script type="text/javascript">
+  	
+  	var $jq = jQuery.noConflict();
+  	
+  </script>
 
-  <script src="javascript/schedule.js"></script>
+  <script src="javascript/hitmen.js"></script>
+  
+  <script>
+  
+  	var hitmen = hitmen();
+  	var view = view( hitmen );
+  	var router = router( hitmen );
+  	
+  	router.query( hitmen );
+  
+  </script>
   
 </html>

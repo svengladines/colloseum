@@ -34,6 +34,11 @@
 	      <param-value>be.occam.colloseum.debrodders.application.config</param-value>
 	  </context-param>
 	  
+	  <context-param>
+        <param-name>spring.profiles.active</param-name>
+        	<param-value>production</param-value>
+    	</context-param>
+	  
 	  <!-- first register log4j listener -->
 
 	<listener>
@@ -65,7 +70,6 @@
 	      </init-param>
 	  </servlet>
 
-	  <!-- map all requests for /app/* to the dispatcher servlet -->
 	  <servlet-mapping>
 	      <servlet-name>dispatcher</servlet-name>
 	      <url-pattern>/rs/*</url-pattern>

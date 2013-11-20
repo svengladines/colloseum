@@ -1,12 +1,40 @@
-<div>
-	<div class="headr">
-		<span><%=title%></span>
+<% if ( "Draft" == status ){ %>
+	<div class="header">
+		<div class="pull-left">
+			<span class="title"><%=title%></span>
+			<span class="whisper">(Concept)</span>
+		</div>
+		<div class="pull-right">
+		</div>
 	</div>
-	<div class="mainn"
-		<div class="pull-left"><img src="<%=preview%>"/></div>
-		<div class="pull-right"><span><%=text%></span>
-	<div class="footr">
-		<span><%=author%></span>
-		<span><%=fmtModified%></span>
+	<div class="middle">
+		<div class="pull-left">
+			<span><%=text%></span>
+		</div>
+		<div class="pull-right">
+			<button class="btn btn-primary btn-small btn-publish" data-publit="<%=id%>">publiceer</button>
+		</div>
 	</div>
-</div>
+	<div class="footer">
+	</div>
+<% } 
+else { %>
+	<div class="header">
+		<div class="pull-left">
+			<span class="title"><%=title%></span>
+		</div>
+		<div class="pull-right">
+		</div>
+	</div>
+	<div class="sub">
+	</div>
+	<div class="middle">
+		<div class="pull-left">
+			<span><%=text%></span>
+		</div>
+		<div class="pull-right">
+			<button class="btn btn-primary btn-small btn-publish-delete" data-publit="<%=id%>">delete</button>
+		</div>
+	</div>
+<% } %>
+

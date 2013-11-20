@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	
+	<parent>
+		<artifactId>parent-pom</artifactId>
+		<groupId>be.occam</groupId>
+		<version>1.0-LATEST-SNAPSHOT</version>
+	</parent>
+	
+ 	<groupId>be.occam.colloseum</groupId>
+ 	<artifactId>colloseum-kblvb</artifactId>
+  	<version>1.0-LATEST-SNAPSHOT</version>
+  	<packaging>jar</packaging>
+  	<name>colloseum-kblvb</name>
+  	<description>colloseum-kblvb</description>
+
+	<dependencies>  
+	
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam</groupId>
+			<artifactId>occam-utils</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+	
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-core-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-soccer-model</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.test</groupId>
+			<artifactId>jtest</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.htmlparser.jericho</groupId>
+			<artifactId>jericho-html</artifactId>
+			<version>3.3</version>
+		</dependency>
+    	
+	</dependencies>
+
+</project>

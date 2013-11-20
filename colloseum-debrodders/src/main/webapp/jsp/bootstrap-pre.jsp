@@ -17,11 +17,14 @@
 			                    	<a href="schedule.html">Kalender</a>
 			                    </li>
 			                    <li>
-			                    	<a href="statistics.html">Statistieken</a>
+			                    	<a href="ranking.html">Stand</a>
+			                    </li>
+			                    <li>
+			                    	<a href="hitman.html">Topscoorders</a>
 			                    </li>
 			                </ul>
 			            </div>
-			            <span class="navbar-text pull-right"><a href="me.html">Sven Gladines</a></span>
+			            <span class="navbar-text pull-right"><a href="me.html">Ikke</a></span>
 		            </div>
 		            
 		        </div>
