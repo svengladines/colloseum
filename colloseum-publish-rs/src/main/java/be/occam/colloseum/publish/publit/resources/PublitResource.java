@@ -1,29 +1,25 @@
 package be.occam.colloseum.publish.publit.resources;
 
+import static be.occam.colloseum.rs.util.Controller.response;
+
 import javax.annotation.Resource;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Providers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import be.occam.colloseum.application.ProvidersRegistry;
+import be.occam.colloseum.publish.publit.service.IPublitService;
 import be.occam.colloseum.publit.Publit;
-import be.occam.colloseum.publit.repository.IPublitRepository;
 
-import com.sun.jersey.api.core.HttpContext;
-
-@Path("publits/{id}")
-@Component
+@Controller
+@RequestMapping("/publits/{id}")
 @Scope("singleton")
 public class PublitResource {
 	
@@ -31,77 +27,29 @@ public class PublitResource {
 		= LoggerFactory.getLogger( PublitResource.class );
 	
 	@Resource
-	protected IPublitRepository publitRepository;
+	protected IPublitService publitService;
 	
-	@OPTIONS
-	public Response options() {
+	@RequestMapping( method= { RequestMethod.PUT })
+	public ResponseEntity<Publit> put( @RequestBody Publit publit ) {
 		
-		return Response.ok()
-			.header("Access-Control-Allow-Origin","*")
-			.header("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
-			.header("Access-Control-Allow-Headers", "Accept,Content-Type")
-			.build();
+		this.logger.info( "[{}]; put", publit );
 		
+		publit = this.publitService.update( publit );
+			
+		return response( publit, HttpStatus.CREATED );
+			
 	}
 	
-	@GET
-	public Publit get( @PathParam( "id" ) String id, @Context HttpContext httpContext ) {
+	@RequestMapping( method= { RequestMethod.DELETE })
+	public ResponseEntity<Publit> delete( @PathVariable String id) {
 		
-		this.logger.info( "get, uri =[{}]", httpContext.getUriInfo().getRequestUri() );
+		this.logger.info( "[{}]; delete", id );
 		
-		Publit publit
-			= this.publitRepository.findOne( id );
-		
-		return publit;
-		
-	}
-	
-	@PUT
-	public Response put(@PathParam( "id" ) String id, Publit publit, @Context HttpContext httpContext ) {
-		
-		this.logger.info( "put, uri =[{}]", httpContext.getUriInfo().getRequestUri() );
-		
-		/*
-		Publit stored
-			= this.get( id, httpContext );
-		
-		if ( stored == null ) {
-			throw new WebApplicationException( Status.NOT_FOUND );
-		}
-		*/
-		
-		// publit.setId( id );
-		// publit.setUrl( URIUtil.url( httpContext, publit ).toString() );
-				
-		this.publitRepository.save( publit );
-		
-		return Response.ok()
-			.header("Access-Control-Allow-Origin","*")
-			.header("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS")
-			.header("Access-Control-Allow-Headers", "Accept,Content-Type")
-		.entity( publit ).build();
-		
-	}
-	
-	@DELETE
-	public Publit delete(@PathParam( "id" ) String id, @Context HttpContext httpContext ) {
-		
-		this.logger.info( "delete, uri =[{}]", httpContext.getUriInfo().getRequestUri() );
-		
-		Publit publit
-			= this.get( id , httpContext );
-		
-		// this.publitRepository.delete( publit );
-		
-		return publit;
-		
-	}
-	
-	@Context
-	public void setProviders(Providers providers) {
-		
-		ProvidersRegistry.register( providers );
-		
+		Publit publit 
+			= this.publitService.delete( id );
+			
+		return response( publit, HttpStatus.OK );
+			
 	}
 	
 }

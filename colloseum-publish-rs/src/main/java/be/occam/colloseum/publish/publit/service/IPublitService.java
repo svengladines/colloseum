@@ -10,5 +10,7 @@ public interface IPublitService {
 	
 	public Publit create( Publit publit );
 	public Publit update( Publit publit );
+	
+	public Publit delete( String id );
 
 }
