@@ -1,0 +1,51 @@
+.publit {
+	
+	margin-top: 5px;
+	margin-bottom: 25px;
+	
+}
+
+.publit .header {
+	
+	width: 100%;
+	padding-top: 5px;
+	overflow: auto;
+	
+}
+
+.publit .header .title {
+	
+	font-weight: bold;
+	
+}
+
+.publit .middle {
+	
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	overflow: auto;
+	padding: 5px;
+	
+}
+
+.publit .footer {
+	
+	width: 100%;
+	background-color: #f8f8f8;
+	padding: 5px;
+	
+}
+
+.publit-draft {
+	
+}
+
+.fnt {
+	font-family: 'Conv_wg_handy_icons';
+	font-size: 40px;
+}
+
+.btn-publish {
+	margin-bottom: 5px;	
+}

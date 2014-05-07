@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	    
+    <title>FC KU Leuven</title>
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/outside.css"/>
+    
+   	<script src="javascript/jquery-1.7.2.min.js"></script>
+   	<script src="bootstrap/js/bootstrap.js"></script>
+   	<script src="javascript/template.js"></script>
+   	
+</head>
+<body>
+
+  <script type="text/javascript">
+  	
+  	var $jq = jQuery.noConflict();
+  	
+  </script>
+  <div>
+		<br/>
+		<br/>
+  </div>
+  <div class="container">
+  	
+  	<div class="row">
+	  		
+	    <form class="form-horizontal">
+				 <div class="control-group person">
+					 <label class="control-label" for="email">E-mailadres</label>
+					<div class="controls">
+						<input type="text" id="email" class="input-xlarge" placeholder="homer.simpson@springfield.net" required>
+					</div>
+				</div>
+				<div id="given" class="control-group person">
+					<label class="control-label">Voornaam</label>
+					<div class="controls">
+						<input id="givenName" type="text" class="input-xlarge" placeholder="Homer" required>
+					</div>
+				</div>
+				<div id="family" class="control-group person">
+					<label class="control-label">Naam</label>
+					<div class="controls">
+						<input id="familyName" type="text" class="input-xlarge" placeholder="Simpson" required>
+					</div>
+				</div>
+				<div id="nick" class="control-group person">
+					<label class="control-label">Bijnaam</label>
+					<div class="controls">
+						<input id="nickName" type="text" class="input-xlarge" placeholder="The Fat Man" required>
+					</div>
+				</div>
+				<div id="nick" class="control-group person hide">
+					<div class="controls">
+						<input id="id" type="hidden"/>
+					</div>
+				</div>
+				<div id="pw" class="control-group credential hide">
+					<label class="control-label" for="password">Wachtwoord</label>
+					<div class="controls">
+						<input type="password" id="password" placeholder="***" required>
+					</div>
+				</div>
+				<div class="control-group credential hide">
+					<label class="control-label" for="confirmPassword">Bevestig wachtwoord</label>
+					<div class="controls">
+						<input type="password" id="confirmPassword" placeholder="***" required>
+					</div>
+				</div>
+				<div class="control-group person">
+					<div class="controls">
+						<button id="personButton" type="button" class="btn btn-primary">Verder</button>
+					</div>
+				</div>
+				<div class="control-group credential hide">
+					<div class="controls">
+						<button id="credentialButton" type="button" class="btn btn-primary">Verder</button>
+					</div>
+				</div>
+				<div id="forgotten-div" class="alert alert-block alert-error alert-inverse hide">
+   				 <button type="button" class="close" data-dismiss="alert">&times;</button>
+   				 <p>
+    				Het ingevulde wachtwoord komt niet overeen met het opgegeven e-mailadres. Probeer a.u.b. opnieuw.
+    			</p>
+    			<p>
+    				Wachtwoord vergeten ? Zorg dat je e-mailadres hierboven is ingevuld en klik op <button id="resetBtn" type="button" class="btn btn-warning">Verzend</button></button> 
+    			</p>
+			</div>
+			</form>
+			
+	  		
+	 </div>
+	  		
+  	</div>
+  	
+    <script>
+    
+    	var $jq = jQuery.noConflict();
+    	
+    	var get = function( callback ) {
+    		
+    		var crd = null;
+    		
+    		$jq.ajax( {
+				type: "GET",
+				url: "rs/persons/template",
+				dataType: "json",
+				success: function( template ) {
+					
+					if ( callback ) {
+						callback( template );
+					}
+					
+				},
+				error: function( response ) {
+					alert( response );
+				}
+			});
+    		
+    		return crd;
+    		
+    	}
+    
+	    var post = function( person ) {
+	    	
+	    	var perz
+	    		= gather( person );
+			
+			$jq.ajax( {
+				type: "POST",
+				url: "rs/persons.json",
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify( perz ),
+				success: function( responsePerson ) {
+					console.log( responsePerson.id );
+					$jq("#id").val( responsePerson.id );
+					$jq(".person").hide();
+					$jq(".credential").show();
+				},
+				error: function( response ) {
+					if ( response.status == 401 ) {
+						console.log( response.status );
+					}
+					else {
+						console.log( response.status );
+					}
+				}
+			});
+			
+		}
+	    
+	    var gather = function( person ) {
+	    	
+	    	person.familyName = $jq("#familyName").val() ;
+	    	person.givenName = $jq("#givenName").val() ;
+	    	person.nickName = $jq("#nickName").val() ;
+	    	person.email = $jq("#email").val() ;
+	    	
+	    	return person;
+	    	
+	   	};
+	   	
+	var getCredential = function( callback ) {
+    		
+    		var crd = null;
+    		
+    		$jq.ajax( {
+				type: "GET",
+				url: "rs/credentials/template",
+				dataType: "json",
+				success: function( responseCredential ) {
+					
+					callback( responseCredential );
+					
+				},
+				error: function( response ) {
+					alert( response );
+				}
+			});
+    		
+    		return crd;
+    		
+    	}
+    
+	    var postCredential = function( credential ) {
+	    	
+	    	var cred
+	    		= gatherCredential( credential );
+			
+			$jq.ajax( {
+				type: "POST",
+				url: "rs/credentials.json",
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify( cred ),
+				success: function( responseCredential ) {
+				},
+				error: function( response ) {
+					alert( response );
+				}
+			});
+			
+		}
+	    
+	    var gatherCredential = function( credential) {
+	    	
+	    	credential.userId = $jq("#id").val();
+	    	credential.reference = $jq("#email").val() ;
+	    	credential.passWord = $jq("#password").val() ;
+	    	credential.status = "Created" ;
+	    	
+	    	return credential;
+	    	
+	    	
+	    }
+	   	
+	 $jq("#personButton").click( function() { get( post ); } );
+	 
+	 $jq("#credentialButton").click( function() { getCredential( postCredential ); } );
+	 
+	 $jq("#resetButton").click( function() { get( post ); } );
+	    
+    </script>
+
+  </body>
+</html>

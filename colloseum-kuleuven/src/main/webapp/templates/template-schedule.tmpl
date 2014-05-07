@@ -1,0 +1,9 @@
+<td><span><%=dx%></span></td>
+		<td><span class="home"><%=homeTeam.name%></span></td>
+		<td><span class="away"><%=awayTeam.name%></span></td>
+		<td><span class="kick"><%=tx%></span></td>
+		<td>
+ 		<% if ( ! isYetToCome ){ %>
+			<span class="score badge"><%=homeTeamScore%>-<%=awayTeamScore%></span>
+		<% } %>
+</td>

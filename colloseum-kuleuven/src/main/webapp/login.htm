@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	    
+    <title>FC KU Leuven</title>
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/outside.css"/>
+    
+   	<script src="javascript/jquery-1.7.2.min.js"></script>
+   	<script src="bootstrap/js/bootstrap.js"></script>
+   	<script src="javascript/template.js"></script>
+   	
+</head>
+<body>
+
+  <script type="text/javascript">
+  	
+  	var $jq = jQuery.noConflict();
+  	
+  </script>
+  <div>
+		<br/>
+		<br/>
+  </div>
+  <div class="container">
+  	
+  	<div class="row">
+	  		
+	    <form class="form-horizontal">
+				 <div class="control-group">
+					 <label class="control-label" for="brodderEmail">E-mailadres</label>
+					<div class="controls">
+						<input type="text" id="brodderEmail" placeholder="homer.simpson@springfield.net">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="brodderPassWord">Password</label>
+					<div class="controls">
+						<input type="password" id="brodderPassWord" placeholder="***">
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button id="inButton" type="button" class="btn btn-primary">Inloggen</button>
+					</div>
+				</div>
+				<div id="forgotten-div" class="alert alert-block alert-error alert-inverse hide">
+   				 <button type="button" class="close" data-dismiss="alert">&times;</button>
+   				 <p>
+    				Het ingevulde wachtwoord komt niet overeen met het opgegeven e-mailadres. Probeer a.u.b. opnieuw.
+    			</p>
+    			<p>
+    				Wachtwoord vergeten ? Zorg dat je e-mailadres hierboven is ingevuld en klik op <button id="resetBtn" type="button" class="btn btn-warning">Verzend</button></button> 
+    			</p>
+			</div>
+			</form>
+			
+	  		
+	 </div>
+	  		
+  	</div>
+  	
+    <script>
+    
+    	var $jq = jQuery.noConflict();
+    	
+    	var get = function( callback ) {
+    		
+    		var crd = null;
+    		
+    		$jq.ajax( {
+				type: "GET",
+				url: "rs/credentials/template",
+				dataType: "json",
+				success: function( responseCredential ) {
+					
+					if ( callback ) {
+						callback( responseCredential );
+					}
+					
+				},
+				error: function( response ) {
+					alert( response );
+				}
+			});
+    		
+    		return crd;
+    		
+    	}
+    
+	    var put = function( credential ) {
+	    	
+	    	var cred
+	    		= gather( credential );
+			
+			$jq.ajax( {
+				type: "PUT",
+				url: "rs/credentials/" + encodeURIComponent( credential.reference ) + ".json",
+				// type: "POST",
+				// url: "rs/credentials",
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify( cred ),
+				success: function( responseCredential ) {
+					window.location = responseCredential.protectedUrl;
+				},
+				error: function( response ) {
+					if ( response.status == 401 ) {
+						$jq("#forgotten-div").show();
+					}
+				}
+			});
+			
+		}
+	    
+	    var gather = function( credential) {
+	    	
+	    	credential.reference = $jq("#brodderEmail").val() ;
+	    	credential.passWord = $jq("#brodderPassWord").val() ;
+	    	credential.status = "Check" ;
+	    	
+	    	return credential;
+	    	
+	    	
+	    }
+	  
+	 	$jq("#inButton").click( function() { get( put ); } );
+	 
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	    
+    <title>FC KU Leuven</title>
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/outside.css"/>
+    
+   	<script src="javascript/jquery-1.7.2.min.js"></script>
+   	<script src="bootstrap/js/bootstrap.js"></script>
+   	<script src="javascript/template.js"></script>
+   	
+</head>
+<body>
+	<div>
+		<br/>
+		<br/>
+	</div>
+	<div class="container">
+		<div id="indexCarousel" class="carousel intro">
+		    <div class="carousel-inner">
+			    <div class="item active">
+				    <img src="images/team-17-11-2013.jpg"/>	
+				     <div class="carousel-caption">
+				     	<p>
+				     		<h3>Welkom bij FC KU Leuven</h3>
+				     	</p>
+				     	<p>
+				     		Ga verder als <a href="kuleuven.html"><strong>bezoeker</strong></a> of <button id="loginBtn" class="btn btn-primary">Login</button>
+				     	</p>
+				     </div>
+			    </div>
+		    </div>
+		   </div>
+	  </div>
+	 
+	 <script>
+	 
+	 var $jq = jQuery.noConflict();
+	 
+	 $jq("#loginBtn").click( function( ) {
+  			
+		window.location = "login.htm";
+		
+	 });
+  			
+	 </script>
+</body>
+</html>
