@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="nl">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -31,13 +32,24 @@
 				     		<h3>Welkom bij FC De Brodders</h3>
 				     	</p>
 				     	<p>
-				     		Ga verder als <a href="debrodders.html"><strong>bezoeker</strong></a> of <button class="btn btn-primary">Login</button>
+				     		Ga verder als <a href="debrodders.html"><strong>bezoeker</strong></a> of <button id="loginBtn" class="btn btn-primary">Login</button>
 				     	</p>
 				     </div>
 			    </div>
 		    </div>
 		   </div>
-	  	</div>
-	 </container>
+	  </div>
+	 
+	 <script>
+	 
+	 var $jq = jQuery.noConflict();
+	 
+	 $jq("#loginBtn").click( function( ) {
+  			
+		window.location = "login.htm";
+		
+	 });
+  			
+	 </script>
 </body>
 </html>

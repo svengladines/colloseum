@@ -2,6 +2,9 @@ package be.occam.colloseum.credential.resources;
 
 import static be.occam.utils.spring.web.Controller.response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
@@ -37,12 +40,28 @@ public class CredentialResource {
 		// Credential saved = this.credentialRepository.save( credential );
 		
 		if ( stored.getPassWord().equals( credential.getPassWord() ) ) {
-			return response( stored, HttpStatus.OK );	
+			
+			Map<String,String> headers
+				= new HashMap<String, String>();
+			
+			headers.put( "Set-Cookie", cookie( credential ) );
+			return response( stored, HttpStatus.OK, headers );	
 		}
 		else {
 			return response( HttpStatus.UNAUTHORIZED );
 		}
 		
+		
+	}
+	
+	protected String cookie( Credential credential ) {
+		
+		StringBuilder builder
+			= new StringBuilder();
+		
+		builder.append( "cusr=" ).append( "svekke" ).append( "; Path=/; Expires=Wed, 09 Jun 2021 10:18:14 GMT");
+		
+		return builder.toString();
 		
 	}
 

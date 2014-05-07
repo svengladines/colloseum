@@ -37,8 +37,15 @@
 	
 }
 
-
-
 .publit-draft {
 	
+}
+
+.fnt {
+	font-family: 'Conv_wg_handy_icons';
+	font-size: 40px;
+}
+
+.btn-publish {
+	margin-bottom: 5px;	
 }

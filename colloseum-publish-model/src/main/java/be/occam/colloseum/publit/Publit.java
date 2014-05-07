@@ -9,6 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class Publit {
+	
+	public static enum Status {
+		Draft,
+		Published,
+		Retracted
+	}
 
 	@Id
 	protected String id;
@@ -19,6 +25,8 @@ public class Publit {
 	protected String url;
 	
 	protected Date touched;
+	
+	protected Status status;
 	
 	/*
 	// protected String play;
@@ -40,9 +48,20 @@ public class Publit {
 	
 	protected boolean canRender;
 	*/
+	
+	
 
 	public String getId() {
 		return id;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public Publit setStatus(Status status) {
+		this.status = status;
+		return this;
 	}
 
 	public Publit setId(String id) {
@@ -73,6 +92,20 @@ public class Publit {
 	}
 
 	public Publit setTest(String text) {
+		this.text = text;
+		return this;
+	}
+
+	public Date getTouched() {
+		return touched;
+	}
+
+	public Publit setTouched(Date touched) {
+		this.touched = touched;
+		return this;
+	}
+
+	public Publit setText(String text) {
 		this.text = text;
 		return this;
 	}
@@ -174,5 +207,6 @@ public class Publit {
 	}
 	
 	*/
+	
 	
 }

@@ -2,7 +2,7 @@
   	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<artifactId>parent-pom</artifactId>
+		<artifactId>occam-parent-pom</artifactId>
 		<groupId>be.occam</groupId>
 		<version>1.0-LATEST-SNAPSHOT</version>
 	</parent>
@@ -31,6 +31,12 @@
 	   			<groupId>org.springframework.data</groupId>
 	   			<artifactId>spring-data-jpa</artifactId>
 	   			<version>${spring-data-jpa}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
 		</dependency>
 	
 	</dependencies>

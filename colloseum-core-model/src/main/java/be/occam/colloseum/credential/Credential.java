@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Credential {
 	
 	public enum Status {
+		Created,
+		Confirmed,
 		Passed,
 		Rejected,
 		Check

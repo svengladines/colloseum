@@ -15,7 +15,8 @@ import be.occam.colloseum.core.credential.repository.impl.FileSystemCredentialRe
 import be.occam.colloseum.credential.repository.ICredentialRepository;
 import be.occam.colloseum.kblvb.application.config.CuteGirlFromTheKblvb;
 import be.occam.colloseum.kblvb.application.config.KblvbApplicationConfig;
-import be.occam.colloseum.publish.application.config.PublishAppEngineApplicationConfig;
+import be.occam.colloseum.person.service.IPersonService;
+import be.occam.colloseum.person.service.impl.DefaultPersonService;
 import be.occam.colloseum.publish.publit.service.IPublitService;
 import be.occam.colloseum.publish.publit.service.impl.DefaultPublitService;
 import be.occam.colloseum.soccer.club.hats.Bookie;
@@ -51,7 +52,7 @@ public class DeBroddersApplicationConfig {
 	
 	@Configuration
 	@Profile({ConfigurationProfiles.PRODUCTION,ConfigurationProfiles.DEV})
-	@Import( PublishAppEngineApplicationConfig.class )
+	// @Import( PublishAppEngineApplicationConfig.class )
 	static class RepositoryConfigForProduction {
 	
 		@Bean
@@ -105,6 +106,11 @@ public class DeBroddersApplicationConfig {
 		@Bean
 		public IPublitService publitService() {
 			return new DefaultPublitService();
+		}
+		
+		@Bean
+		public IPersonService personService() {
+			return new DefaultPersonService();
 		}
 		
 	}

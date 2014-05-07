@@ -9,6 +9,7 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
+     <link rel="stylesheet" href="css/fonts.css"/>
     <link rel="stylesheet" href="css/calendar.css"/>
     <link rel="stylesheet" href="css/publit.css"/>
     

@@ -2,17 +2,11 @@ package be.occam.colloseum.soccer.rs.jtests;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.ws.rs.core.MediaType;
-
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
 import be.occam.colloseum.soccer.match.Match;
-import be.occam.colloseum.soccer.team.Team;
 import be.occam.test.jtest.JTest;
-
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 public class TestMatchesResource extends JTest {
 	

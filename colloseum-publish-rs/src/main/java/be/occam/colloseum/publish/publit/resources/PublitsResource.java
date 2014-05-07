@@ -1,6 +1,6 @@
 package be.occam.colloseum.publish.publit.resources;
 
-import static be.occam.colloseum.rs.util.Controller.response;
+import static be.occam.utils.spring.web.Controller.response;
 
 import java.util.Collection;
 import java.util.Collections;

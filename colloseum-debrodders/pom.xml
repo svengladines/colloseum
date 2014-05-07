@@ -58,6 +58,13 @@
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-publish-appengine</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
 		<!-- De Brodders are a soccer team, yes! -->
 		
 		<dependency>
@@ -75,6 +82,21 @@
 		</dependency>
 		
 		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.colloseum</groupId>
+			<artifactId>colloseum-kblvb</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<type>jar</type>
+			<groupId>be.occam.test</groupId>
+			<artifactId>jtest</artifactId>
+			<version>1.0-LATEST-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>jstl</groupId>
  			<artifactId>jstl</artifactId>
   			<version>1.2</version>
@@ -86,15 +108,7 @@
 			<groupId>be.occam.colloseum</groupId>
 			<artifactId>colloseum-core-filesystem</artifactId>
 			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.test</groupId>
-			<artifactId>jtest</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>

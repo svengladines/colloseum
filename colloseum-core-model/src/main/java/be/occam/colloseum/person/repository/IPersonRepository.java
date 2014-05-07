@@ -1,18 +1,11 @@
 package be.occam.colloseum.person.repository;
 
-import java.util.Set;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.ws.rs.ext.Providers;
-
-import be.occam.colloseum.action.Action;
 import be.occam.colloseum.person.Person;
 
-public interface IPersonRepository {
+public interface IPersonRepository extends JpaRepository<Person, String>{
 	
-	public Person findOne( String id );
-	
-	public Set<Person> findAll( Providers providers );
-	
-	public Person persist( Person person );
+	public Person findById( String id );
 
 }

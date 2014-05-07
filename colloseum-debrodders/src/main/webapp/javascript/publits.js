@@ -13,8 +13,9 @@ var PublitList = Backbone.Collection.extend({
 
 	    model: Publit,
 
-	    past: function() {
-	      
+	    comparator: function( publit ) {
+	    	console.log( publit.attributes.touched );
+	      return 0 - publit.attributes.touched;
 	    },
 	    
 	    future: function() {
@@ -28,7 +29,7 @@ var PublitList = Backbone.Collection.extend({
 
 var PublitView = Backbone.View.extend({
 
-    tagName:  "div",
+    tagName:  "li",
 
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
@@ -38,12 +39,11 @@ var PublitView = Backbone.View.extend({
 
     render: function() {
     	
+    	this.$el.addClass("media");
+    	
     	var json = this.model.toJSON();
     	
-    	json["dx"] = moment( json.starts ).format("DD MMMM");
-    	json["tx"] = moment( json.starts ).format("HH:mm");
-    	
-    	this.$el.addClass("publit");
+    	// this.$el.addClass("publit");
     	
     	if ( json["status"] ) {
     		this.$el.addClass( "publit-" + json["status"].toLowerCase() );	
@@ -65,18 +65,21 @@ var PublitsView = Backbone.View.extend({
 
     el: $jq("#publits"),
     
+    callback: null,
+    
     publits: null,
 
     initialize: function() {
 
-      this.listenTo(publits, 'reset', this.addAll );
-      this.listenTo(publits, 'all', this.render );
+      //this.listenTo(publits, 'reset', this.addAll );
+      this.listenTo(publits, 'sync', this.addAll );
+      this.listenTo(publits, 'destroy', this.addAll );
 
     },
 
-  render: function() {
-    
-  },
+    render: function() {
+    	
+    },
 
     addOne: function(publit) {
       var view = new PublitView({model: publit});
@@ -84,7 +87,9 @@ var PublitsView = Backbone.View.extend({
     },
 
     addAll: function() {
+      $jq("#publits").html("");
       publits.each(this.addOne, this);
+      this.options.callback();
     }
 
 });
@@ -113,8 +118,8 @@ var publits = function() {
 	return new PublitList();
 };
 	
-var view = function( publits ) {
-	return new PublitsView( publits ); 
+var view = function( publitz, callbck ) {
+	return new PublitsView( { publits : publitz, callback: callbck } ); 
 };
 
 var router = function( publits ) {

@@ -4,21 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.Embedded;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import be.occam.colloseum.action.Action;
 import be.occam.colloseum.action.ActionDTO;
-import be.occam.colloseum.action.repository.IActionRepository;
 import be.occam.colloseum.model.LivingBeing;
+import be.occam.colloseum.model.Tag;
 import be.occam.colloseum.person.repository.IPersonRepository;
 
 @XmlRootElement
 public class Person extends LivingBeing {
 	
-	protected String name;
+	protected String familyName;
 	
-	protected String firstName;
+	protected String givenName;
 	
 	protected String nickName;
 	
@@ -35,23 +36,33 @@ public class Person extends LivingBeing {
 	@Resource
 	IPersonRepository personRepository;
 	
+	public Person() {
+	}
+	
+	public Person( Person person ) {
+		this.setId( person.getId() );
+		this.setGivenName( person.getGivenName() );
+		this.setFamilyName( person.getFamilyName() );
+		this.setEmail( person.getEmail() );
+	}
+	
 	@XmlAttribute
-	public String getName() {
-		return name;
+	public String getFamilyName() {
+		return this.familyName;
 	}
 
-	public Person setName(String name) {
-		this.name = name;
+	public Person setFamilyName(String name) {
+		this.familyName = name;
 		return this;
 	}
 
 	@XmlAttribute
-	public String getFirstName() {
-		return firstName;
+	public String getGivenName() {
+		return givenName;
 	}
 
-	public Person setFirstName(String firstName) {
-		this.firstName = firstName;
+	public Person setGivenName(String givenName) {
+		this.givenName = givenName;
 		return this;
 	}
 
@@ -90,12 +101,6 @@ public class Person extends LivingBeing {
 		// this.personRepository.persist( this , null );
 		return this;
 		
-	}
-
-	@Override
-	public Person setId(String id) {
-		super.setId( id );
-		return this;
 	}
 	
 	public Person accept( ActionDTO action ) {

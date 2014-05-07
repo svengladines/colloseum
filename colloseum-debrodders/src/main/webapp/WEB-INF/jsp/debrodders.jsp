@@ -20,7 +20,13 @@
     		<div id="right" class="span12">
     			
     			<div class="row">
+    				<div>
+    					<span class="label label-info">Wil je ook iets bijdragen aan de site ? Typ de titel van je artikeltje en druk op 'enter' </span>
+    					<br/>
+    					<br/>
+    				</div>
     				<form id="dropForm" class="form-inline">
+    					
     					<div class="input-prepend">
     						<!-- <button type="button" class="btn btn-primary">Upload</button>  -->
     						<input id="dropZone" type="text" class="input-xxlarge" required/>
@@ -29,8 +35,8 @@
    					</form>
     			</div>
     			
-    			<div id="publits" class="row">
-    				
+    			<div class="row">
+    				 <ul id="publits" class="media-list"></ul>
     			</div>
     			
     		</div>
@@ -99,11 +105,11 @@
 			if ( ( input.indexOf("http://") == 0 ) || (  input.indexOf("https://") == 0 ) ) {
 				
 				// post URL to server
-				publits.create( {url:input} );
+				publits.create( {url:input}, {wait:true} );
 				
 			}
 			else {
-				publits.create( {title:input} );
+				publits.create( {title:input}, {wait:true} );
 			}
 						
   		});
@@ -131,15 +137,26 @@
 				
 				if ( publit ) {
 					
-					publit.destroy();
+					publit.destroy( {wait:true} );
 					
 				}
 	  			
+	  		});
+			
+			$jq(".publit-published").hover( function( ) {
+	  			
+					$jq(this).find(".axion").show();
+	  			
+	  			}, function( ) {
+	  			
+					$jq(this).find(".axion").hide();
+	  			
 	  			});
+			
 		};
 		
 		var publits = publits();
-		var view = view( publits );
+		var view = view( publits, clickButtons );
 		var router = router( publits );
 	
 		router.list( publits, clickButtons );

@@ -1,5 +1,5 @@
-#Wed Aug 29 22:31:19 CEST 2012
-activeProfiles=
+#Wed Oct 09 19:04:46 CEST 2013
+activeProfiles=occam
 eclipse.preferences.version=1
 fullBuildGoals=process-test-resources
 resolveWorkspaceProjects=true

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import be.occam.colloseum.publisher.IPublisher;
-import be.occam.colloseum.publisher.core.registry.impl.RemarkPublisher;
 
 public class PublisherRegistry {
 	

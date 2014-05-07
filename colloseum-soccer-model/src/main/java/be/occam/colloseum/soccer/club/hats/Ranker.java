@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import be.occam.colloseum.hat.Hat;
+import be.occam.colloseum.model.Tag;
 import be.occam.colloseum.soccer.league.hats.CuteGirlFromTheLeague;
 import be.occam.colloseum.soccer.ranking.Ranking;
 
-public class Ranker extends Hat {
+public class Ranker extends ClubHat {
 	
 	protected String us;
 	
-	public Ranker( String us ) {
-		this.us = us;
+	public Ranker( Tag clubTag ) {
+		super( clubTag );
 	}
 	
 	@Resource

@@ -55,6 +55,12 @@ public class Timing {
 		
 	}
 	
+	public static String date( Date date, String format ) {
+		
+		return new SimpleDateFormat( format). format( date );
+		
+	}
+	
 	public static String moment( Date date ) {
 		
 		return momentFormat.format( date );

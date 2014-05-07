@@ -1,11 +1,13 @@
 package be.occam.colloseum.soccer.match;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import be.occam.colloseum.model.Tag;
 import be.occam.colloseum.soccer.team.Team;
 
 @XmlRootElement
@@ -35,6 +37,8 @@ public class Match {
 	protected RegistrationStatus registrationStatus;
 	
 	protected boolean deviantKickOff;
+	
+	protected Set<Tag> tags;
 
 	public String getId() {
 		
@@ -142,8 +146,13 @@ public class Match {
 		this.deviantKickOff = deviantKickOff;
 		return this;
 	}
-	
-	
-	
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
 	
 }

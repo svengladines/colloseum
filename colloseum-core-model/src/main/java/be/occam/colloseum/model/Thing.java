@@ -1,14 +1,18 @@
 package be.occam.colloseum.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Thing {
 	
 	protected String id;
 	
-	protected Set<String> tags;
+	protected Set<Tag> tags
+		= new HashSet<Tag>();
 	
 	@XmlAttribute
 	public String getId() {
@@ -19,21 +23,32 @@ public class Thing {
 		this.id = id;
 		return this;
 	}
-	
-	public Set<String> getTags() {
+
+	public Set<Tag> getTags() {
 		return tags;
 	}
-	
-	public void setTags(Set<String> tags) {
+
+	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}
-	
-	public Thing tag( String tag ) {
+
+	@Override
+	public boolean equals(Object obj) {
 		
-		this.tags.add( tag );
+		boolean equals
+			= false;
 		
-		return this;
+		if ( obj instanceof Thing ) {
+			
+			if ( ((Thing) obj).getId().equals( this.id ) ) {
+				equals = true;
+			}
+			
+		}
 		
+		return equals;
 	}
+	
+	
 
 }

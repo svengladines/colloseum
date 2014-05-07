@@ -1,40 +1,44 @@
 <% if ( "Draft" == status ){ %>
-	<div class="header">
-		<div class="pull-left">
-			<span class="title"><%=title%></span>
-			<span class="whisper">(Concept)</span>
+	<li class="media">
+	    <div class="pull-left">
+	    </div>
+	    <div class="media-body">
+	   	 	<h4 class="media-heading"><%=title%></h4>
+	   	 	<p class="fnt">
+	   	 		<textarea rows="3"></textarea>
+	   	 	</p>
+	   	 	<div class="pull-right">
+	   	 		<div>
+					<button class="btn btn-primary btn-publish" data-publit="<%=id%>">publiceer</button>
+				</div>
+				<div>
+					<button class="btn btn-danger btn-publish-delete" data-publit="<%=id%>">verwijder</button>
+				</div>
+			</div>
+			<div class="pull-right">
+				
+			</div>
 		</div>
-		<div class="pull-right">
-		</div>
-	</div>
-	<div class="middle">
-		<div class="pull-left">
-			<span><%=text%></span>
-		</div>
-		<div class="pull-right">
-			<button class="btn btn-primary btn-small btn-publish" data-publit="<%=id%>">publiceer</button>
-		</div>
-	</div>
-	<div class="footer">
-	</div>
+	</li>
 <% } 
 else { %>
-	<div class="header">
-		<div class="pull-left">
-			<span class="title"><%=title%></span>
+ 	<li class="media">
+	    <span class="pull-left"></span>
+	    <div class="media-body">
+	   	 	<h4 class="media-heading"><%=title%></h4>
+	   	 	<p>
+	   	 		<%=text%>
+	   	 	</p>
+	   	 	<div class="pull-right axion hide">
+				<div>
+					<button class="btn btn-danger btn-publish-delete" data-publit="<%=id%>">verwijder</button>
+				</div>
+			</div>
+			<div class="pull-right">
+				
+			</div>
 		</div>
-		<div class="pull-right">
 		</div>
-	</div>
-	<div class="sub">
-	</div>
-	<div class="middle">
-		<div class="pull-left">
-			<span><%=text%></span>
-		</div>
-		<div class="pull-right">
-			<button class="btn btn-primary btn-small btn-publish-delete" data-publit="<%=id%>">delete</button>
-		</div>
-	</div>
+	</li>
 <% } %>
 

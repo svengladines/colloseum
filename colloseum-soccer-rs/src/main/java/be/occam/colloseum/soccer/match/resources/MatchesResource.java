@@ -38,26 +38,47 @@ public class MatchesResource {
 	@RequestMapping( method = { RequestMethod.GET } )
 	@ResponseBody
 	public ResponseEntity<List<Match>> query(
-				@RequestParam(required=false) String cut ) {
+				@RequestParam(required=false) String from,
+				@RequestParam(required=false) String till,
+				@RequestParam(required=false) String next ) {
 		
 		Date now = new Date();
 		
 		Date cutOff
-			= cut == null ? now : Timing.date( cut ) ;
+			= from == null ? now : Timing.date( from ) ;
 		
-		List<Plan> planned
-			= this.fixer.whatAreThePlannedMatchesAfter( cutOff );
+		Date untill
+			= till == null ? null : Timing.date( till ) ;
+		
+		boolean nxt
+			= next == null ? false : Boolean.parseBoolean( next );
 		
 		List<Match> matches
-			= new ArrayList<Match>( planned.size() );
+			= new ArrayList<Match>( );
 		
-		for ( Plan p : planned ) {
+		if ( nxt ) {
 			
-			Match m 
-				= p.getSubject();
+			Match nextMatch
+				= this.fixer.whatIsTheNextMatch();
 			
-			matches.add( m );
+			if ( nextMatch != null ) {
+				matches.add( nextMatch );
+			}
 			
+		}
+		else {
+			
+			List<Plan> planned
+				= this.fixer.whatAreThePlannedMatchesAfter( cutOff, untill );
+			
+			for ( Plan p : planned ) {
+				
+				Match m 
+					= p.getSubject();
+				
+				matches.add( m );
+				
+			}
 		}
 		
 		return response( matches, HttpStatus.OK );

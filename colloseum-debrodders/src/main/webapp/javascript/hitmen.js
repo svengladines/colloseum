@@ -55,19 +55,8 @@
 		    initialize: function() {
 	
 		      this.listenTo(hitmen, 'reset', this.addAll );
-		      this.listenTo(hitmen, 'all', this.render );
 	
 		      this.main = $jq('#main');
-	
-		    },
-	
-		  render: function() {
-		    
-		      if (HitMans.length) {
-		        this.main.show();
-		      } else {
-		        this.main.hide();
-		      }
 	
 		    },
 	

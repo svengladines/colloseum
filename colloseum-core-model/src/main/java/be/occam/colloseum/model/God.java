@@ -7,12 +7,12 @@ import be.occam.colloseum.person.Person;
 public class God extends Person {
 
 	@Override
-	public String getName() {
+	public String getFamilyName() {
 		return "Almighty";
 	}
 
 	@Override
-	public String getFirstName() {
+	public String getGivenName() {
 		return "The";
 	}
 
