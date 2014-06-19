@@ -12,6 +12,10 @@ public class RSVP {
 	public RSVP( ) {
 	}
 	
+	public RSVP( Answer answer ) {
+		this.answer = answer;
+	}
+	
 	public RSVP( String answer ) {
 		this.answer = Answer.valueOf( new StringBuilder().append( answer.substring(0,1).toUpperCase()) .append( answer.substring(1) ).toString() );
 	}

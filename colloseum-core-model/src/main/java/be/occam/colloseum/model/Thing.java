@@ -3,12 +3,16 @@ package be.occam.colloseum.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
 public class Thing {
 	
+	@Id
 	protected String id;
 	
 	protected Set<Tag> tags
@@ -19,9 +23,8 @@ public class Thing {
 		return id;
 	}
 	
-	public Thing setId(String id) {
+	public void setId(String id) {
 		this.id = id;
-		return this;
 	}
 
 	public Set<Tag> getTags() {
@@ -31,7 +34,7 @@ public class Thing {
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		

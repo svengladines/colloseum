@@ -2,8 +2,8 @@
   	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<artifactId>occam-parent-pom</artifactId>
-		<groupId>be.occam</groupId>
+		<groupId>be.occam.colloseum</groupId>
+		<artifactId>colloseum-parent-pom</artifactId>
 		<version>1.0-LATEST-SNAPSHOT</version>
 	</parent>
 	
@@ -38,7 +38,20 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-	
+		
+		<!-- 
+		 <dependency>
+   			<groupId>org.datanucleus</groupId>
+   			<artifactId>datanucleus-core</artifactId>
+   			<version>4.0.0-release</version>
+		</dependency>
+		
+       	 <dependency>
+   			<groupId>org.datanucleus</groupId>
+   			<artifactId>datanucleus-api-jpa</artifactId>
+   			<version>4.0.0-release</version>
+		</dependency>
+	 	-->
 	</dependencies>
-  	
+	
 </project>

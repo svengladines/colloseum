@@ -16,6 +16,7 @@ import be.occam.colloseum.email.MailMan;
 import be.occam.colloseum.soccer.club.hats.Fixer;
 import be.occam.colloseum.soccer.club.hats.SpokesPerson;
 import be.occam.colloseum.soccer.club.hats.TeamManager;
+import be.occam.colloseum.soccer.club.hats.WebMaster;
 import be.occam.colloseum.soccer.match.Match;
 import be.occam.colloseum.soccer.player.Player;
 import be.occam.colloseum.soccer.registration.Registration;
@@ -44,7 +45,7 @@ public class InvitePlayersToRegister {
 	@Resource
 	MailMan mailMan;
 	
-	public void play() {
+	public void play( WebMaster webMaster ) {
 		
 		Match match = fixer.whatIsTheNextMatch();
 		
@@ -81,7 +82,7 @@ public class InvitePlayersToRegister {
 			}
 			
 			List<MimeMessage> emails
-				= this.spokesPerson.writeInvitationEmails( toInvitePlayers , match);
+				= this.spokesPerson.writeInvitationEmails( toInvitePlayers , match, webMaster );
 			
 			for ( MimeMessage email : emails ) {
 				this.mailMan.deliver( email );

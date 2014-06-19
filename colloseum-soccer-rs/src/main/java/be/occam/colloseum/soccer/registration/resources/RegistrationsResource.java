@@ -68,7 +68,7 @@ public class RegistrationsResource {
 		
 		if ( registration != null ) {
 			
-			registration.setId( UUID.randomUUID().toString() );
+			registration.setId( new StringBuilder( p.getId() ).append( "-" ).append( m.getId() ).toString() );
 			
 			if ( rsvp != null ) {
 				// filter on rsvp
@@ -128,7 +128,9 @@ public class RegistrationsResource {
 		
 		map.put("registrations", response.getBody() );
 		
-		return new ModelAndView( "registration", map );
+		logger.debug( "[{}] has [{}] registrations for match [{}]", player, response.getBody().size(), match );
+		
+		return new ModelAndView( "registrations", map );
 		
 	}
 	

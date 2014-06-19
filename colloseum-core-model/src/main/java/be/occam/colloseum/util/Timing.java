@@ -7,16 +7,22 @@ import java.util.Date;
 public class Timing {
 	
 	public static String datePattern 
-		= "dd.MM.yyyy";
+		= "dd/MM/yyyy";
+	
+	public static String flatDatePattern 
+		= "ddMMyyyy";
 	
 	public static String timePattern
-		= "hh:mm";
+		= "HH:mm";
 	
 	public static final SimpleDateFormat momentFormat
 		= new SimpleDateFormat( new StringBuilder( datePattern ).append( " " ).append( timePattern ).toString() );
 	
 	public static final SimpleDateFormat dateFormat
 		= new SimpleDateFormat( new StringBuilder( datePattern ).toString() );
+	
+	public static final SimpleDateFormat flatDateFormat
+		= new SimpleDateFormat( new StringBuilder( flatDatePattern ).toString() );
 	
 	public static final SimpleDateFormat timeFormat
 		= new SimpleDateFormat( new StringBuilder( timePattern ).toString() );
@@ -25,6 +31,28 @@ public class Timing {
 		
 		try {
 			return dateFormat.parse( date );
+		}
+		catch( ParseException e ) {
+			throw new RuntimeException( e );
+		}
+		
+	}
+	
+	public static Date date( String date, SimpleDateFormat format ) {
+		
+		try {
+			return format.parse( date );
+		}
+		catch( ParseException e ) {
+			throw new RuntimeException( e );
+		}
+		
+	}
+	
+	public static Date date( String date, String format ) {
+		
+		try {
+			return  new SimpleDateFormat().parse( date ) ;
 		}
 		catch( ParseException e ) {
 			throw new RuntimeException( e );
@@ -55,9 +83,21 @@ public class Timing {
 		
 	}
 	
+	public static String time( Date date ) {
+		
+		return timeFormat.format( date );
+		
+	}
+	
 	public static String date( Date date, String format ) {
 		
-		return new SimpleDateFormat( format). format( date );
+		return new SimpleDateFormat( format ).format( date );
+		
+	}
+	
+	public static String date( Date date, SimpleDateFormat format ) {
+		
+		return format.format( date );
 		
 	}
 	

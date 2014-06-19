@@ -1,6 +1,7 @@
 package be.occam.colloseum.soccer.match;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -38,7 +39,8 @@ public class Match {
 	
 	protected boolean deviantKickOff;
 	
-	protected Set<Tag> tags;
+	protected Set<Tag> tags
+		= new HashSet<Tag>();
 
 	public String getId() {
 		

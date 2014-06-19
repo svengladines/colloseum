@@ -2,12 +2,14 @@ package be.occam.colloseum.soccer.rs.jtests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
 import be.occam.colloseum.soccer.match.Match;
 import be.occam.test.jtest.JTest;
 
+@Ignore
 public class TestMatchesResource extends JTest {
 	
 	private final String path

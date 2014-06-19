@@ -1,7 +1,10 @@
 package be.occam.colloseum.credential;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement
 public class Credential {
 	
@@ -13,6 +16,8 @@ public class Credential {
 		Check
 	}
 	
+	@Id
+	protected String id;
 	protected String reference;
 	protected String passWord;
 	protected String userId;
@@ -61,6 +66,14 @@ public class Credential {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

@@ -9,8 +9,6 @@ import be.occam.colloseum.core.credential.repository.impl.FileSystemCredentialRe
 import be.occam.colloseum.credential.repository.ICredentialRepository;
 import be.occam.colloseum.person.repository.IPersonRepository;
 import be.occam.colloseum.person.repository.impl.FileSystemPersonRepository;
-import be.occam.colloseum.publish.publit.repository.impl.FileSystemPublitRepository;
-import be.occam.colloseum.publit.repository.IPublitRepository;
 import be.occam.colloseum.util.ConfigurationProfiles;
 
 @Configuration
@@ -25,12 +23,15 @@ public class KULeuvenApplicationConfigForTest {
 	@PropertySource("classpath:colloseum-publisher-rs.properties")
 	static class RepositoryConfigForTest {
 		
+		/*
+		
 		@Bean
 		IPublitRepository publitRepository() {
 			
 			return new FileSystemPublitRepository();
 			
 		}
+		*/
 		
 		@Bean
 		ICredentialRepository credentialRepository() {

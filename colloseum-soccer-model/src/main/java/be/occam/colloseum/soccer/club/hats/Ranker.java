@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import be.occam.colloseum.model.Tag;
-import be.occam.colloseum.soccer.league.hats.CuteGirlFromTheLeague;
+import be.occam.colloseum.soccer.league.hats.LeagueManager;
 import be.occam.colloseum.soccer.ranking.Ranking;
 
 public class Ranker extends ClubHat {
@@ -17,7 +17,7 @@ public class Ranker extends ClubHat {
 	}
 	
 	@Resource
-	CuteGirlFromTheLeague cuteGirlFromTheLeague;
+	LeagueManager cuteGirlFromTheLeague;
 	
 	public List<Ranking> whatAreTheCurrentRankings( ) {
 		

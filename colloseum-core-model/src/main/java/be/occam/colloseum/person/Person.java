@@ -1,40 +1,58 @@
 package be.occam.colloseum.person;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.annotation.Resource;
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import be.occam.colloseum.action.Action;
-import be.occam.colloseum.action.ActionDTO;
-import be.occam.colloseum.model.LivingBeing;
 import be.occam.colloseum.model.Tag;
-import be.occam.colloseum.person.repository.IPersonRepository;
 
+import com.google.appengine.api.datastore.Key;
+
+@Entity
 @XmlRootElement
-public class Person extends LivingBeing {
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="dtype")
+@DiscriminatorValue(value="PN")
+public class Person {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Key key;
+	
+	protected String id;
 	
 	protected String familyName;
 	
 	protected String givenName;
 	
-	protected String nickName;
-	
 	protected String url;
 	
 	protected String email;
 	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER )
+	protected Set<Tag> tags
+		= new HashSet<Tag>();
+	
+	/*
 	protected List<ActionDTO> todo
 		= new LinkedList<ActionDTO>();
 	
 	protected List<Action<?>> done
 		= new LinkedList<Action<?>>();
-	
-	@Resource
-	IPersonRepository personRepository;
+	*/
 	
 	public Person() {
 	}
@@ -44,6 +62,7 @@ public class Person extends LivingBeing {
 		this.setGivenName( person.getGivenName() );
 		this.setFamilyName( person.getFamilyName() );
 		this.setEmail( person.getEmail() );
+		this.getTags().addAll( person.getTags() );
 	}
 	
 	@XmlAttribute
@@ -63,16 +82,6 @@ public class Person extends LivingBeing {
 
 	public Person setGivenName(String givenName) {
 		this.givenName = givenName;
-		return this;
-	}
-
-	@XmlAttribute
-	public String getNickName() {
-		return nickName;
-	}
-
-	public Person setNickName(String nickName) {
-		this.nickName = nickName;
 		return this;
 	}
 
@@ -103,11 +112,29 @@ public class Person extends LivingBeing {
 		
 	}
 	
+	/*
 	public Person accept( ActionDTO action ) {
 		
 		this.todo.add( action );
 		return this;
 		
 	}
-	
+	*/
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+
 }

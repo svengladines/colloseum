@@ -19,7 +19,7 @@ var postRegistration = function ( rx ) {
 	    processData: false,
 		data: JSON.stringify(rx),
 		success: function( registration ) {
-				window.location.reload();
+				window.location.href = "/colloseum-kuleuven/rs/registrations/" + registration.id ;
 		},
 		error: function( registration ) {
 			alert( "error" );

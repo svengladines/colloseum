@@ -34,13 +34,6 @@
 	      <param-value>be.occam.colloseum.kuleuven.application.config</param-value>
 	  </context-param>
 	  
-	  <context-param>
-        <param-name>spring.profiles.active</param-name>
-        	<param-value>test</param-value>
-    	</context-param>
-	  
-	  <!-- first register log4j listener -->
-
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
@@ -49,7 +42,11 @@
   	<listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   	</listener>
-
+  	
+  	<listener>
+    	<listener-class>be.occam.colloseum.soccer.club.hats.WebMaster</listener-class>
+	</listener>
+  	
 	  <!-- Declare a Spring MVC DispatcherServlet as usual -->
 	  <servlet>
 	      <servlet-name>dispatcher</servlet-name>

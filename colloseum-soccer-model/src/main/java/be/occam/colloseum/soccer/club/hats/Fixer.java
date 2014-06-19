@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import be.occam.colloseum.calendar.CalendarGuy;
 import be.occam.colloseum.event.Event;
 import be.occam.colloseum.model.Tag;
-import be.occam.colloseum.soccer.league.hats.CuteGirlFromTheLeague;
+import be.occam.colloseum.soccer.league.hats.LeagueManager;
 import be.occam.colloseum.soccer.match.Match;
 import be.occam.colloseum.soccer.match.Match.RegistrationStatus;
 import be.occam.colloseum.soccer.match.actions.Plan;
@@ -28,7 +28,7 @@ public class Fixer extends ClubHat {
 	CalendarGuy calendarGuy;
 	
 	@Resource
-	CuteGirlFromTheLeague cuteGirlFromTheLeague;
+	LeagueManager cuteGirlFromTheLeague;
 	
 	public Fixer( Tag clubTag ) {
 		super( clubTag );
@@ -180,6 +180,7 @@ public class Fixer extends ClubHat {
 		
 		Match match
 			= new Match()
+			.setId( Timing.date( event.getStart(), Timing.flatDateFormat ) )
 			.setHomeTeam( homeTeam )
 			.setAwayTeam( awayTeam )
 			.setName( subject )
@@ -261,7 +262,7 @@ public class Fixer extends ClubHat {
 	public Match whichMatchHasID( String id ) {
 
 		Date date
-			= Timing.date( id );
+			= Timing.date( id, Timing.flatDateFormat );
 
 		List<Match> list
 			= this.whatMatchesArePlannedAt( date );
