@@ -1,6 +1,8 @@
 package be.occam.colloseum.event;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,6 +13,9 @@ public class Event {
 	protected Date end;
 	protected String subject;
 	protected String description; 
+	
+	protected List<String> attendees
+		= new LinkedList<String>();
 	
 	public Date getStart() {
 		return start;
@@ -46,5 +51,11 @@ public class Event {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<String> getAttendees() {
+		return attendees;
+	}
+	
+	
 	
 }

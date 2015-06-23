@@ -2,8 +2,8 @@
   	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>be.occam.colloseum</groupId>
 		<artifactId>colloseum-parent-pom</artifactId>
+		<groupId>be.occam.colloseum</groupId>
 		<version>1.0-LATEST-SNAPSHOT</version>
 	</parent>
 	

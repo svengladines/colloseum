@@ -137,4 +137,13 @@ public class Person {
 		this.tags = tags;
 	}
 
+	public Key getKey() {
+		return key;
+	}
+
+	public Person setKey(Key key) {
+		this.key = key;
+		return this;
+	}
+
 }
