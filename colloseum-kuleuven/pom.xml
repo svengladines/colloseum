@@ -30,59 +30,12 @@
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-core-rs</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<!-- 
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publish-model</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publish-rs</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publish-filesystem</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		-->
-		
-		<!-- 
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-publish-appengine</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		 -->
-		
 		<!-- KU Leuven Foot is a soccer team, yes! -->
 		
 		<dependency>
 			<type>jar</type>
 			<groupId>be.occam.colloseum</groupId>
 			<artifactId>colloseum-soccer-model</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-soccer-rs</artifactId>
 			<version>1.0-LATEST-SNAPSHOT</version>
 		</dependency>
 		
@@ -108,14 +61,6 @@
   			<scope>runtime</scope>
 		</dependency>
 		
-		<dependency>
-			<type>jar</type>
-			<groupId>be.occam.colloseum</groupId>
-			<artifactId>colloseum-core-filesystem</artifactId>
-			<version>1.0-LATEST-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-
 	</dependencies>
 
 </project>

@@ -1,4 +1,4 @@
-package be.occam.colloseum.kuleuven.application.web.resources;
+package be.occam.colloseum.kuleuven.web.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

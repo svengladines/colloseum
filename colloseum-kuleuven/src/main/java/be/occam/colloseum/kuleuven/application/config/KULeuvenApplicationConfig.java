@@ -2,7 +2,6 @@ package be.occam.colloseum.kuleuven.application.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
@@ -21,14 +20,13 @@ import be.occam.colloseum.kuleuven.cron.scenarios.InvitePlayersToRegister;
 import be.occam.colloseum.kuleuven.hats.KULeuvenLeagueManager;
 import be.occam.colloseum.model.Tag;
 import be.occam.colloseum.person.HeadHunter;
-import be.occam.colloseum.person.service.IPersonService;
-import be.occam.colloseum.person.service.impl.DefaultPersonService;
 import be.occam.colloseum.soccer.club.hats.Bookie;
 import be.occam.colloseum.soccer.club.hats.Fixer;
 import be.occam.colloseum.soccer.club.hats.Ranker;
 import be.occam.colloseum.soccer.club.hats.SpokesPerson;
 import be.occam.colloseum.soccer.club.hats.TeamManager;
 import be.occam.colloseum.soccer.league.hats.LeagueManager;
+import be.occam.utils.oauth.OAuthor;
 import be.occam.utils.spring.configuration.ConfigurationProfiles;
 
 @Configuration
@@ -37,12 +35,6 @@ public class KULeuvenApplicationConfig {
 
 	final static String BASE_PKG = "be.occam.colloseum.kuleuven";
 
-	@Configuration
-	@ComponentScan(BASE_PKG)
-	public static class WebConfig {
-		
-	}
-	
 	@Configuration
 	static class PropertiesConfigurer {
 		
@@ -114,7 +106,7 @@ public class KULeuvenApplicationConfig {
 		
 		@Bean
 		public Client client() {
-			return new Client( "forza.sedes@gmail.com" );
+			return new Client( "kuleuven.football@gmail.com", "AIzaSyCPEMQfgM9qibjle3HXPjaZ5lYORQ-whVA" );
 		}
 		
 		@Bean
@@ -127,14 +119,9 @@ public class KULeuvenApplicationConfig {
 			return new KULeuvenLeagueManager();
 		}
 		
-	}
-	
-	@Configuration
-	static class ServiceConfiguration {
-		
 		@Bean
-		public IPersonService personService() {
-			return new DefaultPersonService();
+		public OAuthor oAuthor() {
+			return new OAuthor( "https://accounts.google.com/o/oauth2/auth" );
 		}
 		
 	}

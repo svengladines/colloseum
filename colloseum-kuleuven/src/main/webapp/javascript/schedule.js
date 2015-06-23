@@ -28,7 +28,7 @@ $jq( function() {
 		    },
 		    
 		    url: function() {
-		    	return "rs/matches?cut=31.08.2013";
+		    	return "rs/matches?cut=28.08.2015";
 		    }
 	 });
 
@@ -65,37 +65,43 @@ $jq( function() {
 		    		
 		    	}
 		    	
-		    	if ( json.homeTeam.name == "KU Leuven" ) {
-		    		
-		    		this.$el.find(".home").addClass( "bold" );
-		    		
-		    		if ( json.homeTeamScore > json.awayTeamScore ){
-		    			this.$el.find(".score").addClass( "badge-success" );
-		    		}
-		    		else if ( json.homeTeamScore == json.awayTeamScore ){
-		    			this.$el.find(".score").addClass( "badge-warning" );
-		    		}
-		    		else {
-		    			this.$el.find(".score").addClass( "badge-important" );
-		    		}
-		    		
-		    		
+		    	if ( json.homeTeam ) {
+			    	
+			    	if ( json.homeTeam.name == "KU Leuven" ) {
+			    		
+			    		this.$el.find(".home").addClass( "bold" );
+			    		
+			    		if ( json.homeTeamScore > json.awayTeamScore ){
+			    			this.$el.find(".score").addClass( "badge-success" );
+			    		}
+			    		else if ( json.homeTeamScore == json.awayTeamScore ){
+			    			this.$el.find(".score").addClass( "badge-warning" );
+			    		}
+			    		else {
+			    			this.$el.find(".score").addClass( "badge-important" );
+			    		}
+			    		
+			    		
+			    	}
 		    	}
 		    	
-		    	if ( json.awayTeam.name == "KU Leuven" ) {
-		    		
-		    		this.$el.find(".away").addClass( "bold" );
-		    		
-		    		if ( json.homeTeamScore < json.awayTeamScore ){
-		    			this.$el.find(".score").addClass( "badge-success" );
-		    		}
-		    		else if ( json.homeTeamScore == json.awayTeamScore ){
-		    			this.$el.find(".score").addClass( "badge-warning" );
-		    		}
-		    		else {
-		    			this.$el.find(".score").addClass( "badge-important" );
-		    		}
-		    		
+		    	if ( json.awayTeam ) {
+		    	
+			    	if ( json.awayTeam.name == "KU Leuven" ) {
+			    		
+			    		this.$el.find(".away").addClass( "bold" );
+			    		
+			    		if ( json.homeTeamScore < json.awayTeamScore ){
+			    			this.$el.find(".score").addClass( "badge-success" );
+			    		}
+			    		else if ( json.homeTeamScore == json.awayTeamScore ){
+			    			this.$el.find(".score").addClass( "badge-warning" );
+			    		}
+			    		else {
+			    			this.$el.find(".score").addClass( "badge-important" );
+			    		}
+			    		
+			    	}
 		    	}
 		    	
 		    	return this.$el;

@@ -7,17 +7,13 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:include page="/jsp/head.jsp" />
+<jsp:include page="/WEB-INF/jsp/head.jsp" />
 	
-<body>
-
-	<jsp:include page="/jsp/bootstrap-pre.jsp" />
-  
 <body>
 
 	<div class="container">
 	
-    	<div class="row-fluid">
+    	<div class="row">
     
     		<div id="calendar" class="span12">
 
@@ -48,6 +44,7 @@
    	 	</div>
    	 </div>
 
+<script src="javascript/noconflict.js"></script>
   <script src="javascript/schedule.js"></script>
   
 </html>
